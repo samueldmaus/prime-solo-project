@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AddHero from '../AddHero/AddHero';
 
 import './App.css';
 
@@ -91,6 +92,9 @@ class App extends Component {
               path="/home"
               component={LandingPage}
               authRedirect="/user"
+            />
+            <ProtectedRoute
+              exact path = "/addhero" component={AddHero}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}
