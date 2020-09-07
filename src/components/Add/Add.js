@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -17,7 +16,49 @@ import ArrowBackTwoToneIcon from '@material-ui/icons/ArrowBackTwoTone'
 class Add extends Component{
     state = {
         isHero: true,
-        isFlipped: false
+        isFlipped: false,
+        newHero: {
+            name: '',
+            role: '',
+            image: '',
+            ability_one: '',
+            ability_two: '',
+            ability_three: '',
+            ability_four: '',
+            ability_ult: ''
+        }
+    };
+    
+    handleChange = (event, property) => {
+        this.setState({
+            ...this.state,
+            newHero: {
+                ...this.state.newHero,
+                [property]: event.target.value
+            }
+        })
+    };
+
+    resetForm = () => {
+        this.setState({
+            ...this.state,
+            isFlipped: false,
+            newHero: {
+                name: '',
+                role: '',
+                image: '',
+                ability_one: '',
+                ability_two: '',
+                ability_three: '',
+                ability_four: '',
+                ability_ult: ''
+            }
+        })
+    }
+
+    addHero = (event) => {
+        event.preventDefault();
+        console.log(this.state.newHero)
     }
     render(){
         return(
@@ -25,11 +66,11 @@ class Add extends Component{
             flipSpeedBackToFront={1.0}>
                 <Card variant='outlined'>
         
-                    <CardActionArea onClick={()=>this.setState({isHero:true, isFlipped:true})}>
+                    <CardActionArea onClick={()=>this.setState({...this.state, isHero:true, isFlipped:true})}>
                         <h2>Add Hero</h2>
                         <CardMedia style={{height: 150, width: 100}} />
                     </CardActionArea>
-                    <CardActionArea onClick={()=>this.setState({isHero:false, isFlipped:true})}>
+                    <CardActionArea onClick={()=>this.setState({...this.state, isHero:false, isFlipped:true})}>
                         <h2>Add Map</h2>
                         <CardMedia style={{height: 150, width: 100}} />
                     </CardActionArea>
@@ -37,23 +78,28 @@ class Add extends Component{
 
                 {this.state.isHero ? (
                     <Card>
-                        <form>
+                        <form onSubmit={this.addHero}>
                             <div className="heroForm">
-                                <TextField margin="dense" required label="Hero Name" />
-                                <RadioGroup row id="heroRole">
+                                <TextField margin="dense" label="Hero Name" value={this.state.newHero.name} onChange={(event)=>this.handleChange(event, 'name')}/>
+                                <RadioGroup row id="heroRole" onChange={(event)=>this.handleChange(event, 'role')}>
                                     <FormControlLabel value="Tank" control={<Radio />} label="Tank" />
                                     <FormControlLabel value="DPS" control={<Radio />} label="DPS" />
                                     <FormControlLabel value="Support" control={<Radio />} label="Support" />
                                 </RadioGroup>
-                                <TextField margin="dense" required label="Hero Image" />
+                                <TextField margin="dense" label="Hero Image" value={this.state.newHero.image} onChange={(event)=>this.handleChange(event, 'image')}/>
                             </div>
-                            <TextField margin="dense" required variant="outlined" rows={4} fullWidth multiline label="First Ability" />
-                            <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline label="Second Ability" />
-                            <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline label="Third Ability" />
-                            <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline label="Fourth Ability" />
-                            <TextField margin="dense" required variant="outlined" rows={4} fullWidth multiline label="Ultimate Ability" />
-                            <IconButton type="submit" ><ArrowBackTwoToneIcon fontSize="large"></ArrowBackTwoToneIcon></IconButton>
-                            <IconButton><AddSharpIcon fontSize="large"></AddSharpIcon></IconButton>
+                            <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline 
+                            label="First Ability" value={this.state.newHero.ability_one} onChange={(event)=>this.handleChange(event, 'ability_one')}/>
+                            <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline
+                            label="Second Ability" value={this.state.newHero.ability_two} onChange={(event)=>this.handleChange(event, 'ability_two')}/>
+                            <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline
+                            label="Third Ability" value={this.state.newHero.ability_three} onChange={(event)=>this.handleChange(event, 'ability_three')}/>
+                            <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline
+                            label="Fourth Ability" value={this.state.newHero.ability_four} onChange={(event)=>this.handleChange(event, 'ability_four')} />
+                            <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline
+                            label="Ultimate Ability" value={this.state.newHero.ability_ult} onChange={(event)=>this.handleChange(event, 'ability_ult')}/>
+                            <IconButton onClick={this.resetForm}><ArrowBackTwoToneIcon fontSize="large"></ArrowBackTwoToneIcon></IconButton>
+                            <IconButton type="submit"><AddSharpIcon fontSize="large"></AddSharpIcon></IconButton>
                         </form>
                     </Card>
                 ) : (
@@ -67,4 +113,4 @@ class Add extends Component{
     }
 }
 
-export default Add;
+export default connect()(Add);
