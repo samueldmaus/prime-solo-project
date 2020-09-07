@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -26,9 +27,16 @@ class Add extends Component{
             ability_three: '',
             ability_four: '',
             ability_ult: ''
+        },
+        newMap: {
+            name: '',
+            type: '',
+            image: '',
+            description: ''
         }
     };
-    
+
+    // handles change for entering hero information
     handleChange = (event, property) => {
         this.setState({
             ...this.state,
@@ -39,6 +47,7 @@ class Add extends Component{
         })
     };
 
+    // flips card back over and resets set
     resetForm = () => {
         this.setState({
             ...this.state,
@@ -56,9 +65,17 @@ class Add extends Component{
         })
     }
 
+    // sends new hero information
     addHero = (event) => {
         event.preventDefault();
-        console.log(this.state.newHero)
+        console.log(this.state.newHero);
+        axios.post('/api/hero/add', this.state.newHero)
+        .then(response => {
+            console.log('ADDED HERO TO DB');
+            this.resetForm();
+        }).catch(error => {
+            console.log('error in POST', error)
+        })
     }
     render(){
         return(
