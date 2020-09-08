@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import {withStyles} from '@material-ui/core/styles'
+import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import ReactCardFlip from 'react-card-flip';
@@ -13,6 +16,20 @@ import IconButton from '@material-ui/core/IconButton';
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import ArrowBackTwoToneIcon from '@material-ui/icons/ArrowBackTwoTone'
 
+const styles = theme => ({
+    card: {
+        margin: 5,
+        alignItems: 'center'
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%'
+    },
+    header: {
+        textAlign: 'center',
+        backgroundColor: '#f99e1a'
+    }
+});
 
 class Add extends Component{
     state = {
@@ -110,21 +127,28 @@ class Add extends Component{
     };
 
     render(){
+        const {classes} = this.props;
         return(
             <ReactCardFlip isFlipped={this.state.isFlipped} flipSpeedFrontToBack={1.0}
             flipSpeedBackToFront={1.0}>
-                <Card variant='outlined'>
-        
-                    <CardActionArea onClick={()=>this.setState({...this.state, isHero:true, isFlipped:true})}>
-                        <h2>Add Hero</h2>
-                        <CardMedia style={{height: 150, width: 100}} />
-                    </CardActionArea>
-                    <CardActionArea onClick={()=>this.setState({...this.state, isHero:false, isFlipped:true})}>
-                        <h2>Add Map</h2>
-                        <CardMedia style={{height: 150, width: 100}} />
-                    </CardActionArea>
-                </Card>
-
+                <Grid container spacing={1}>
+                    <Grid item xs={6}>
+                        <Card className={classes.card}>
+                            <CardActionArea onClick={()=>this.setState({...this.state, isHero:true, isFlipped:true})}>
+                                <CardHeader className={classes.header} title="ADD HERO"/>
+                                <CardMedia className={classes.media} title="ADD HERO" image="https://bit.ly/327k4aR" />
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Card className={classes.card}>
+                            <CardActionArea onClick={()=>this.setState({...this.state, isHero:false, isFlipped:true})}>
+                                <CardHeader className={classes.header} title="ADD MAP" />
+                                <CardMedia className={classes.media} title="ADD MAP" image="https://bit.ly/3bNn3c5"/>
+                            </CardActionArea>
+                        </Card>
+                    </Grid>
+                </Grid>
                 {this.state.isHero ? (
                     <Card>
                         <form onSubmit={this.addHero}>
@@ -176,4 +200,4 @@ class Add extends Component{
     }
 }
 
-export default connect()(Add);
+export default connect()(withStyles(styles)(Add));
