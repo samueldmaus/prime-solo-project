@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles'
-import {Grid, Card, CardActionArea, CardHeader, CardMedia} from '@material-ui/core';
+import {Grid, Card, CardActionArea, CardHeader} from '@material-ui/core';
 
 const styles = theme => ({
   card: {
@@ -10,7 +10,8 @@ const styles = theme => ({
     alignItems: 'center'
   },
   media: {
-    height: 350
+    height: 400,
+    margin: 10
   }
 })
 
@@ -27,16 +28,17 @@ class UserPage extends Component {
         <Grid>
           <Grid item xs={12}>
             <Card className={classes.card}>
-              <CardActionArea>
+              <CardActionArea onClick={()=>this.props.history.push('/heroes')}>
                 <CardHeader title="HEROES" />
-                <CardMedia className={classes.media} title="HEROES" image="https://bit.ly/2R3o464" />
+                <img className={classes.media} src="https://bit.ly/3bDvFSa" alt="Overwatch Heroes"/>
               </CardActionArea>
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Card>
+            <Card className={classes.card}>
               <CardActionArea>
-                <CardHeader title="MAP" />
+                <CardHeader title="MAPS" />
+                <img className={classes.media} src="https://bit.ly/35gse2T" alt="Overwatch Maps" />
               </CardActionArea>
             </Card>
           </Grid>
