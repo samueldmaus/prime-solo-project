@@ -1,18 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {withStyles} from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardMedia from '@material-ui/core/CardMedia';
 import ReactCardFlip from 'react-card-flip';
-import TextField from '@material-ui/core/TextField';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import Radio from '@material-ui/core/Radio';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import IconButton from '@material-ui/core/IconButton';
+import {withStyles} from '@material-ui/core/styles'
+import {Grid, Card, CardHeader, CardActionArea, CardMedia, TextField,
+    RadioGroup, Radio, FormControlLabel, IconButton} from '@material-ui/core';
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import ArrowBackTwoToneIcon from '@material-ui/icons/ArrowBackTwoTone'
 
@@ -22,7 +14,8 @@ const styles = theme => ({
         alignItems: 'center'
     },
     cardBack: {
-        margin: 15
+        margin: 15,
+        backgroundColor: '#F0F0F0'
     },
     media: {
         height: 0,
@@ -33,7 +26,7 @@ const styles = theme => ({
         backgroundColor: '#f99e1a'
     },
     input: {
-        margin: 20
+        margin: 20,
     }
 });
 
