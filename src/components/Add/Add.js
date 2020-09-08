@@ -17,9 +17,12 @@ import AddSharpIcon from '@material-ui/icons/AddSharp';
 import ArrowBackTwoToneIcon from '@material-ui/icons/ArrowBackTwoTone'
 
 const styles = theme => ({
-    card: {
+    cardFront: {
         margin: 5,
         alignItems: 'center'
+    },
+    cardBack: {
+        margin: 15
     },
     media: {
         height: 0,
@@ -28,6 +31,9 @@ const styles = theme => ({
     header: {
         textAlign: 'center',
         backgroundColor: '#f99e1a'
+    },
+    input: {
+        margin: 20
     }
 });
 
@@ -133,15 +139,15 @@ class Add extends Component{
             flipSpeedBackToFront={1.0}>
                 <Grid container spacing={1}>
                     <Grid item xs={6}>
-                        <Card className={classes.card}>
+                        <Card className={classes.cardFront}>
                             <CardActionArea onClick={()=>this.setState({...this.state, isHero:true, isFlipped:true})}>
                                 <CardHeader className={classes.header} title="ADD HERO"/>
-                                <CardMedia className={classes.media} title="ADD HERO" image="https://bit.ly/327k4aR" />
+                                <CardMedia className={classes.media} title="ADD HERO" image="https://bit.ly/3lTyROm" />
                             </CardActionArea>
                         </Card>
                     </Grid>
                     <Grid item xs={6}>
-                        <Card className={classes.card}>
+                        <Card className={classes.cardFront}>
                             <CardActionArea onClick={()=>this.setState({...this.state, isHero:false, isFlipped:true})}>
                                 <CardHeader className={classes.header} title="ADD MAP" />
                                 <CardMedia className={classes.media} title="ADD MAP" image="https://bit.ly/3bNn3c5"/>
@@ -150,17 +156,17 @@ class Add extends Component{
                     </Grid>
                 </Grid>
                 {this.state.isHero ? (
-                    <Card>
-                        <form onSubmit={this.addHero}>
-                            <div className="heroForm">
+                    <Card className={classes.cardBack}>
+                        <form onSubmit={this.addHero} className={classes.input}>
+                            <div>
                                 <TextField margin="dense" label="Hero Name" value={this.state.newHero.name} onChange={(event)=>this.handleHeroChange(event, 'name')}/>
                                 <RadioGroup row id="heroRoleRadio" onChange={(event)=>this.handleHeroChange(event, 'role')}>
                                     <FormControlLabel value="Tank" control={<Radio />} label="Tank" />
                                     <FormControlLabel value="DPS" control={<Radio />} label="DPS" />
                                     <FormControlLabel value="Support" control={<Radio />} label="Support" />
                                 </RadioGroup>
-                                <TextField margin="dense" label="Hero Image" value={this.state.newHero.image} onChange={(event)=>this.handleHeroChange(event, 'image')}/>
                             </div>
+                            <TextField margin="dense" label="Hero Image" value={this.state.newHero.image} onChange={(event)=>this.handleHeroChange(event, 'image')}/>
                             <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline 
                             label="First Ability" value={this.state.newHero.ability_one} onChange={(event)=>this.handleHeroChange(event, 'ability_one')}/>
                             <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline
@@ -176,8 +182,8 @@ class Add extends Component{
                         </form>
                     </Card>
                 ) : (
-                    <Card>
-                        <form onSubmit={this.addMap}>
+                    <Card className={classes.cardBack}>
+                        <form onSubmit={this.addMap} className={classes.input}>
                             <TextField margin="dense" label="Map Name" value={this.state.newMap.name} onChange={(event)=>this.handleMapChange(event,'name')}/>
                             <RadioGroup row id="mapTypeRadio" onChange={(event)=>this.handleMapChange(event,'type')}>
                                 <FormControlLabel value="Assault" control={<Radio/>} label="Assault"/>
