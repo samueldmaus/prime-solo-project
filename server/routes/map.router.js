@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// route to post new map to db
 router.post('/add', (req, res) => {
     let map = req.body;
     let queryText = `INSERT INTO "maps" ("name", "type", "image", "description")

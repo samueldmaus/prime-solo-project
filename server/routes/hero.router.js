@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const { query } = require('../modules/pool');
 const router = express.Router();
 
+// route to get all the hero information
 router.get('/', (req, res) => {
     let queryText = `SELECT * FROM "heroes"
     ORDER BY "role" DESC;`;
@@ -13,8 +14,8 @@ router.get('/', (req, res) => {
     })
 });
 
+// route to get individual hero information
 router.get('/:id', (req, res) => {
-    console.log(req.params.id);
     let queryText = `SELECT * FROM "heroes"
     WHERE "id" = $1;`;
     pool.query(queryText, [req.params.id])
@@ -24,6 +25,8 @@ router.get('/:id', (req, res) => {
         res.sendStatus(500)
     })
 })
+
+// route to post new hero to db
 router.post('/add', (req, res) => {
     let hero = req.body;
     let queryText = `INSERT INTO "heroes" ("name", "role", "image", "ability_one", "ability_two", "ability_three", "ability_four", "ability_ult")

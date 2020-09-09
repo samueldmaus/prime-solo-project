@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles';
-import {Card, CardHeader, Grid, IconButton} from '@material-ui/core'
+import {Card, CardHeader, Grid, IconButton, Typography} from '@material-ui/core';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
+import EditIcon from '@material-ui/icons/Edit'
 
 const styles = theme => ({
     card: {
@@ -10,13 +12,20 @@ const styles = theme => ({
     },
     image: {
         margin: 10,
-        float: 'left'
+        float: 'left',
+        height: 400,
+        width: 400
     },
     info: {
-        float: 'right'
+        align: 'right',
+        margin: 10,
+
     },
     header: {
         backgroundColor: '#f99e1a'
+    },
+    title: {
+        color: '#f99e1a'
     }
 })
 class IndividualHero extends Component{
@@ -24,34 +33,54 @@ class IndividualHero extends Component{
         console.log(this.props.store.individualHero, this.props.match.params.id);
         let id = this.props.match.params.id;
         this.props.dispatch({type: "GET_IND_HERO", payload: id})
-        
     };
+
+    state = {
+        editIconOn: true,
+        hero: {
+
+        }
+    };
+
+    editMode = () => {
+        this.setState({
+            ...this.state.hero,
+            editIconOn: !this.state.editIconOn
+        })
+    }
 
     render(){
         console.log(this.props.store.individualHero);
         const {classes} = this.props;
         let hero = this.props.store.individualHero[0];
         return(
-        <>
-            <Card className={classes.card}>
-                {hero && 
-                    <>
-                    <CardHeader className={classes.header} title={hero.name} subheader={hero.role}/>
-                    <Grid container>
-                    <Grid item xs={12}>
-                        <img className={classes.image} src={hero.image} alt={hero.name}/>
-                        <div className={classes.info}>
-                            <h4>{hero.ability_one}</h4>
-                            <h4>{hero.ability_two}</h4>
-                            <h4>{hero.ability_three}</h4>
-                            <h4>{hero.ability_four}</h4>
-                            <h4>ULTIMATE: {hero.ability_ult}</h4>
-                        </div>
-                    </Grid>
-                    </Grid>
-                    </>
-                }
-            </Card>
+            <>
+                <Card className={classes.card}>
+                    {hero && 
+                        this.state.editIconOn ? 
+                        (<>
+                            <CardHeader className={classes.header} title={hero.name} subheader={hero.role}/>
+                            <Grid container>
+                            <Grid item xs={12}>
+                                <img className={classes.image} src={hero.image} alt={hero.name}/>
+                                <div className={classes.info}>
+                                    <Typography className={classes.title} variant="h5">ABILITIES:</Typography>
+                                        <h4>{hero.ability_one}</h4>
+                                        <h4>{hero.ability_two}</h4>
+                                        <h4>{hero.ability_three}</h4>
+                                        <h4>{hero.ability_four}</h4>
+                                    <Typography className={classes.title} variant="h5">ULTIMATE:</Typography><h4>{hero.ability_ult}</h4>
+                                </div>
+                            </Grid>
+                            </Grid>
+                            <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
+                            <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
+                        </>) :
+                        (<>
+                            <p>edit mode</p>
+                            <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton> </>)
+                    }
+                </Card>
             </>
         )
     }
