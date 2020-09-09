@@ -39,7 +39,6 @@ class ListHeroes extends Component{
     // sends individual hero to reducer
     viewHero = (hero) => {
         console.log(hero);
-        this.props.dispatch({type: "SAVE_IND_HERO", payload: hero});
         this.props.history.push(`/heroes/${hero.id}`);
     }
     render(){

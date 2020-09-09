@@ -1,5 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool');
+const { query } = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
@@ -13,7 +14,15 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    console.log(req.params.id)
+    console.log(req.params.id);
+    let queryText = `SELECT * FROM "heroes"
+    WHERE "id" = $1;`;
+    pool.query(queryText, [req.params.id])
+    .then(result => {
+        res.send(result.rows)
+    }).catch(error => {
+        res.sendStatus(500)
+    })
 })
 router.post('/add', (req, res) => {
     let hero = req.body;

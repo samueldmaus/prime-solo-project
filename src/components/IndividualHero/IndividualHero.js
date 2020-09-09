@@ -22,18 +22,21 @@ const styles = theme => ({
 class IndividualHero extends Component{
     componentDidMount(){
         console.log(this.props.store.individualHero, this.props.match.params.id);
-        if(this.props.store.individualHero === {}){
-            console.log('TRUE')
-            this.props.dispatch({type: "GET_IND_HERO", payload: this.props.match.paras.id})
-        }
+        let id = this.props.match.params.id;
+        this.props.dispatch({type: "GET_IND_HERO", payload: id})
+        
     };
 
     render(){
-        let hero = this.props.store.individualHero;
+        console.log(this.props.store.individualHero);
         const {classes} = this.props;
+        let hero = this.props.store.individualHero[0];
         return(
+        <>
             <Card className={classes.card}>
-                <CardHeader className={classes.header} title={hero.name} subheader={hero.role}/>
+                {hero && 
+                    <>
+                    <CardHeader className={classes.header} title={hero.name} subheader={hero.role}/>
                     <Grid container>
                     <Grid item xs={12}>
                         <img className={classes.image} src={hero.image} alt={hero.name}/>
@@ -46,7 +49,10 @@ class IndividualHero extends Component{
                         </div>
                     </Grid>
                     </Grid>
+                    </>
+                }
             </Card>
+            </>
         )
     }
 }
