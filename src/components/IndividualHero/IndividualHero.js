@@ -5,7 +5,8 @@ import {withStyles} from '@material-ui/core/styles';
 import {Card, CardHeader, Grid, IconButton, Typography, TextField} from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import EditIcon from '@material-ui/icons/Edit';
-import SaveIcon from '@material-ui/icons/Save'
+import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = theme => ({
     card: {
@@ -71,12 +72,14 @@ class IndividualHero extends Component{
                             </Grid>
                             </Grid>
                             <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
+                            <IconButton><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
                             <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                         </>) :
                         (hero && <>
                             <TextField margin="dense" label="Hero Name" value={this.props.store.individualHero[0].name} />
+                            <TextField margin="dense" label="Hero Role" value={this.props.store.individualHero[0].role} />
                             <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
-                            <IconButton onClick={this.editMode}><SaveIcon></SaveIcon></IconButton>
+                            <IconButton onClick={this.editMode}><SaveIcon fontSize="large"></SaveIcon></IconButton>
                         </>)
                     }
                 </Card>
