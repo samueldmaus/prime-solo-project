@@ -10,6 +10,10 @@ router.get('/', (req, res) => {
     }).catch(error => {
         res.sendStatus(500)
     })
+});
+
+router.get('/:id', (req, res) => {
+    console.log(req.params.id)
 })
 router.post('/add', (req, res) => {
     let hero = req.body;

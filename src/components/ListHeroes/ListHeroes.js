@@ -35,7 +35,8 @@ class ListHeroes extends Component{
     handleRoleSearch = (event) => {
         console.log(event.target.value)
     };
-
+    
+    // sends individual hero to reducer
     viewHero = (hero) => {
         console.log(hero);
         this.props.dispatch({type: "SAVE_IND_HERO", payload: hero});
