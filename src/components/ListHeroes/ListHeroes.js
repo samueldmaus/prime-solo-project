@@ -39,7 +39,7 @@ class ListHeroes extends Component{
     viewHero = (hero) => {
         console.log(hero);
         this.props.dispatch({type: "SAVE_IND_HERO", payload: hero});
-        
+        this.props.history.push(`/heroes/${hero.id}`);
     }
     render(){
         const {classes} = this.props;

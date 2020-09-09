@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Add from '../Add/Add';
 import ListHeroes from '../ListHeroes/ListHeroes'
+import IndividualHero from '../IndividualHero/IndividualHero'
 
 import './App.css';
 
@@ -102,6 +103,9 @@ class App extends Component {
               exact path = "/heroes" component={ListHeroes}
             />
             
+            <ProtectedRoute
+              exact path = '/heroes/:id' component={IndividualHero}
+            />
 
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
