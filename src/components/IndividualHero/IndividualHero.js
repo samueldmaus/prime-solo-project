@@ -90,7 +90,8 @@ class IndividualHero extends Component{
                 editIconOn: !this.state.editIconOn,
                 ...this.state.hero
             })
-              console.log(this.state.hero)
+            let id = this.props.match.params.id;
+            this.props.dispatch({type: "GET_IND_HERO", payload: id});
         }).catch(error => {
             console.log('error in HERO PUT:', error)
         })
