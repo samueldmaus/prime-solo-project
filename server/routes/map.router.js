@@ -13,6 +13,16 @@ router.post('/add', (req, res) => {
     }).catch(error => {
         res.sendStatus(500);
     })
+});
+
+// route to get all map information from db
+router.get('/', (req, res) => {
+    let queryText = `SELECT * FROM "maps";`;
+    pool.query(queryText).then(result => {
+        res.send(result.rows);
+    }).catch(error => {
+        res.sendStatus(500);
+    })
 })
 
 module.exports = router;
