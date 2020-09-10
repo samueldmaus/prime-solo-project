@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles';
-import {Card, CardHeader, Grid, IconButton, Typography, TextField} from '@material-ui/core';
+import {Card, CardHeader, Grid, IconButton, Typography, TextField, RadioGroup, FormControlLabel, Radio} from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
@@ -45,7 +45,6 @@ class IndividualHero extends Component{
         this.setState({
             editIconOn: !this.state.editIconOn,
         })
-        console.log('HERO', this.state.hero)
     }
 
     render(){
@@ -76,10 +75,27 @@ class IndividualHero extends Component{
                             <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                         </>) :
                         (hero && <>
-                            <TextField margin="dense" label="Hero Name" value={this.props.store.individualHero[0].name} />
-                            <TextField margin="dense" label="Hero Role" value={this.props.store.individualHero[0].role} />
-                            <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
-                            <IconButton onClick={this.editMode}><SaveIcon fontSize="large"></SaveIcon></IconButton>
+                            <form className={classes.info}>
+                                <TextField margin="dense" label="Hero Name" value={this.props.store.individualHero[0].name} />
+                                <RadioGroup row id="heroRoleRadio" value={this.props.store.individualHero[0].role}>
+                                        <FormControlLabel selected value="Tank" control={<Radio />} label="Tank" />
+                                        <FormControlLabel value="DPS" control={<Radio />} label="DPS" />
+                                        <FormControlLabel value="Support" control={<Radio />} label="Support" />
+                                </RadioGroup>
+                                <TextField margin="dense" label="Hero Image" value={this.props.store.individualHero[0].image} />
+                                <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
+                                label="First Ability" value={this.props.store.individualHero[0].ability_one}/>
+                                <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
+                                label="Second Ability" value={this.props.store.individualHero[0].ability_two}/>
+                                <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
+                                label="Third Ability" value={this.props.store.individualHero[0].ability_three}/>
+                                <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
+                                label="Fourth Ability" value={this.props.store.individualHero[0].ability_four}/>
+                                <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
+                                label="Ultimate Ability" value={this.props.store.individualHero[0].ability_ult}/>
+                                <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
+                                <IconButton onClick={this.editMode}><SaveIcon fontSize="large"></SaveIcon></IconButton>
+                            </form>
                         </>)
                     }
                 </Card>
