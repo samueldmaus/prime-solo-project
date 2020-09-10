@@ -37,6 +37,19 @@ router.post('/add', (req, res) => {
     }).catch(error => {
         res.sendStatus(500)
     })
+});
+
+router.put('/', (req, res) => {
+    let hero = req.body;
+    let queryText = `UPDATE "heroes" SET "name" = $1, "role" = $2, "image" = $3, "ability_one" = $4, "ability_two" = $5, "ability_three" = $6,
+    "ability_four" = $7, "ability_ult" = $8
+    WHERE "id" = $9;`;
+    pool.query(queryText, [hero.name, hero.role, hero.image, hero.ability_one, hero.ability_two, hero.ability_three, hero.ability_four, hero.ability_ult, hero.id])
+    .then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        res.sendStatus(500)
+    })
 })
 
 module.exports = router;

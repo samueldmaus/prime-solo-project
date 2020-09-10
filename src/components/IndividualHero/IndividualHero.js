@@ -7,6 +7,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
+import axios from 'axios';
 
 const styles = theme => ({
     card: {
@@ -40,6 +41,7 @@ class IndividualHero extends Component{
     state = {
         editIconOn: true,
         hero: {
+            id: '',
             name: '',
             role: '',
             image: '',
@@ -55,6 +57,7 @@ class IndividualHero extends Component{
         this.setState({
             editIconOn: !this.state.editIconOn,
             hero: {
+                id: this.props.store.individualHero[0].id,
                 name: this.props.store.individualHero[0].name,
                 role: this.props.store.individualHero[0].role,
                 image: this.props.store.individualHero[0].image,
@@ -76,9 +79,20 @@ class IndividualHero extends Component{
             }
         })
     }
+    
+    // update hero information on db when save button is clicked
     updateHero = () => {
-        this.setState({
-            editIconOn: !this.state.editIconOn,
+
+        console.log(this.state.hero)
+        axios.put('/api/hero', this.state.hero)
+        .then(response => {
+            this.setState({
+                editIconOn: !this.state.editIconOn,
+                ...this.state.hero
+            })
+              console.log(this.state.hero)
+        }).catch(error => {
+            console.log('error in HERO PUT:', error)
         })
     }
 
