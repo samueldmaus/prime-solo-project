@@ -38,10 +38,45 @@ class IndividualHero extends Component{
     }
 
     state = {
-        editIconOn: true
+        editIconOn: true,
+        hero: {
+            name: '',
+            role: '',
+            image: '',
+            ability_one: '',
+            ability_two: '',
+            ability_three: '',
+            ability_four: '',
+            ability_ult: ''
+        }
     };
 
     editMode = () => {
+        this.setState({
+            editIconOn: !this.state.editIconOn,
+            hero: {
+                name: this.props.store.individualHero[0].name,
+                role: this.props.store.individualHero[0].role,
+                image: this.props.store.individualHero[0].image,
+                ability_one: this.props.store.individualHero[0].ability_one,
+                ability_two: this.props.store.individualHero[0].ability_two,
+                ability_three: this.props.store.individualHero[0].ability_three,
+                ability_four: this.props.store.individualHero[0].ability_four,
+                ability_ult: this.props.store.individualHero[0].ability_ult
+            }
+        })
+    };
+
+    handleChange = (event, property) => {
+        this.setState({
+            ...this.state,
+            hero: {
+                ...this.state.hero,
+                [property]: event.target.value
+            }
+        })
+    }
+    updateHero = () => {
         this.setState({
             editIconOn: !this.state.editIconOn,
         })
@@ -76,25 +111,25 @@ class IndividualHero extends Component{
                         </>) :
                         (hero && <>
                             <form className={classes.info}>
-                                <TextField margin="dense" label="Hero Name" value={this.props.store.individualHero[0].name} />
-                                <RadioGroup row id="heroRoleRadio" value={this.props.store.individualHero[0].role}>
+                                <TextField margin="dense" label="Hero Name" value={this.state.hero.name} onChange={(event)=>this.handleChange(event, 'name')} />
+                                <RadioGroup row id="heroRoleRadio" value={this.state.hero.role} onChange={(event)=>this.handleChange(event, 'role')}>
                                         <FormControlLabel selected value="Tank" control={<Radio />} label="Tank" />
                                         <FormControlLabel value="DPS" control={<Radio />} label="DPS" />
                                         <FormControlLabel value="Support" control={<Radio />} label="Support" />
                                 </RadioGroup>
-                                <TextField margin="dense" label="Hero Image" value={this.props.store.individualHero[0].image} />
+                                <TextField margin="dense" label="Hero Image" value={this.state.hero.image} onChange={(event)=>this.handleChange(event, 'image')} />
                                 <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
-                                label="First Ability" value={this.props.store.individualHero[0].ability_one}/>
+                                label="First Ability" value={this.state.hero.ability_one} onChange={(event)=>this.handleChange(event, 'ability_one')}/>
                                 <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
-                                label="Second Ability" value={this.props.store.individualHero[0].ability_two}/>
+                                label="Second Ability" value={this.state.hero.ability_two} onChange={(event)=>this.handleChange(event, 'ability_two')}/>
                                 <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
-                                label="Third Ability" value={this.props.store.individualHero[0].ability_three}/>
+                                label="Third Ability" value={this.state.hero.ability_three} onChange={(event)=>this.handleChange(event, 'ability_three')}/>
                                 <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
-                                label="Fourth Ability" value={this.props.store.individualHero[0].ability_four}/>
+                                label="Fourth Ability" value={this.state.hero.ability_four} onChange={(event)=>this.handleChange(event, 'ability_four')}/>
                                 <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
-                                label="Ultimate Ability" value={this.props.store.individualHero[0].ability_ult}/>
+                                label="Ultimate Ability" value={this.state.hero.ability_ult} onChange={(event)=>this.handleChange(event, 'ability_ult')}/>
                                 <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
-                                <IconButton onClick={this.editMode}><SaveIcon fontSize="large"></SaveIcon></IconButton>
+                                <IconButton onClick={this.updateHero}><SaveIcon fontSize="large"></SaveIcon></IconButton>
                             </form>
                         </>)
                     }
