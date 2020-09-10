@@ -21,7 +21,8 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Add from '../Add/Add';
 import ListHeroes from '../ListHeroes/ListHeroes'
-import IndividualHero from '../IndividualHero/IndividualHero'
+import IndividualHero from '../IndividualHero/IndividualHero';
+import ListMaps from '../ListMaps/ListMaps'
 
 import './App.css';
 
@@ -105,6 +106,10 @@ class App extends Component {
             
             <ProtectedRoute
               exact path = '/heroes/:id' component={IndividualHero}
+            />
+
+            <ProtectedRoute 
+              exact path = '/maps' component={ListMaps}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

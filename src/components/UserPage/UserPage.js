@@ -36,7 +36,7 @@ class UserPage extends Component {
           </Grid>
           <Grid item xs={12}>
             <Card className={classes.card}>
-              <CardActionArea>
+              <CardActionArea onClick={()=>this.props.history.push('/maps')}>
                 <CardHeader title="MAPS" />
                 <img className={classes.media} src="https://bit.ly/35gse2T" alt="Overwatch Maps" />
               </CardActionArea>
