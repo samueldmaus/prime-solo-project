@@ -53,6 +53,7 @@ class IndividualHero extends Component{
         }
     };
 
+    // switches the view to edit mode and set the hero information to state
     editMode = () => {
         this.setState({
             editIconOn: !this.state.editIconOn,
@@ -70,6 +71,7 @@ class IndividualHero extends Component{
         })
     };
 
+    // handle changes to hero information on edit side of card 
     handleChange = (event, property) => {
         this.setState({
             ...this.state,
@@ -81,8 +83,8 @@ class IndividualHero extends Component{
     }
     
     // update hero information on db when save button is clicked
-    updateHero = () => {
-
+    updateHero = (event) => {
+        event.preventDefault();
         console.log(this.state.hero)
         axios.put('/api/hero', this.state.hero)
         .then(response => {
@@ -95,6 +97,16 @@ class IndividualHero extends Component{
         }).catch(error => {
             console.log('error in HERO PUT:', error)
         })
+    };
+
+    //delete hero from the db
+    deleteHero = (hero) => {
+       axios.delete(`/api/hero/${hero.id}`)
+       .then(response => {
+           this.props.history.push('/heroes')
+       }).catch(error => {
+           console.log('error in HERO DELETE', error)
+       })
     }
 
     render(){
@@ -121,7 +133,7 @@ class IndividualHero extends Component{
                             </Grid>
                             </Grid>
                             <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
-                            <IconButton><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
+                            <IconButton onClick={()=>this.deleteHero(hero)}><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
                             <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                         </>) :
                         (hero && <>
@@ -144,7 +156,7 @@ class IndividualHero extends Component{
                                 <TextField multiline fullWidth rows={4} variant="outlined" margin="dense"
                                 label="Ultimate Ability" value={this.state.hero.ability_ult} onChange={(event)=>this.handleChange(event, 'ability_ult')}/>
                                 <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
-                                <IconButton onClick={this.updateHero}><SaveIcon fontSize="large"></SaveIcon></IconButton>
+                                <IconButton type="submit" onClick={this.updateHero}><SaveIcon fontSize="large"></SaveIcon></IconButton>
                             </form>
                         </>)
                     }
