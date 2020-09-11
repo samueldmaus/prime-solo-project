@@ -26,6 +26,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// route to get individual map info
 router.get('/:id', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "maps"
     WHERE "id" = $1;`;
@@ -34,6 +35,18 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
         res.send(result.rows)
     }).catch(error => {
         res.sendStatus(500)
+    })
+});
+
+// route to delete map from db
+router.delete('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
+    let queryText = `DELETE FROM "maps"
+    WHERE "id" = $1;`;
+    pool.query(queryText, [req.params.id])
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        res.sendStatus(500);
     })
 })
 

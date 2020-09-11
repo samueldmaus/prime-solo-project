@@ -7,7 +7,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FavoriteIcon from '@material-ui/icons/Favorite'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import axios from 'axios';
 
 const styles = theme => ({
@@ -26,7 +26,7 @@ const styles = theme => ({
 
     },
     header: {
-        backgroundColor: '#f99e1a'
+        backgroundColor: '#f99e1a',
     },
     title: {
         color: '#f99e1a'
@@ -121,17 +121,17 @@ class IndividualHero extends Component{
                         (<>
                             <CardHeader className={classes.header} title={hero.name} subheader={hero.role}/>
                             <Grid container>
-                            <Grid item xs={12}>
-                                <img className={classes.image} src={hero.image} alt={hero.name}/>
-                                <div className={classes.info}>
-                                    <Typography className={classes.title} variant="h5">ABILITIES:</Typography>
-                                        <h4>{hero.ability_one}</h4>
-                                        <h4>{hero.ability_two}</h4>
-                                        <h4>{hero.ability_three}</h4>
-                                        <h4>{hero.ability_four}</h4>
-                                    <Typography className={classes.title} variant="h5">ULTIMATE:</Typography><h4>{hero.ability_ult}</h4>
-                                </div>
-                            </Grid>
+                                <Grid item xs={12}>
+                                    <img className={classes.image} src={hero.image} alt={hero.name}/>
+                                    <div className={classes.info}>
+                                        <Typography className={classes.title} variant="h5">ABILITIES:</Typography>
+                                            <h4>{hero.ability_one}</h4>
+                                            <h4>{hero.ability_two}</h4>
+                                            <h4>{hero.ability_three}</h4>
+                                            <h4>{hero.ability_four}</h4>
+                                        <Typography className={classes.title} variant="h5">ULTIMATE:</Typography><h4>{hero.ability_ult}</h4>
+                                    </div>
+                                </Grid>
                             </Grid>
                             <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
                             {this.props.store.user.isAdmin ? (
