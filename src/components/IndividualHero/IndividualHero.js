@@ -42,7 +42,6 @@ class IndividualHero extends Component{
     state = {
         editIconOn: true,
         hero: {
-            id: '',
             name: '',
             role: '',
             image: '',
@@ -59,7 +58,6 @@ class IndividualHero extends Component{
         this.setState({
             editIconOn: !this.state.editIconOn,
             hero: {
-                id: this.props.store.individualHero[0].id,
                 name: this.props.store.individualHero[0].name,
                 role: this.props.store.individualHero[0].role,
                 image: this.props.store.individualHero[0].image,
@@ -86,8 +84,9 @@ class IndividualHero extends Component{
     // update hero information on db when save button is clicked
     updateHero = (event) => {
         event.preventDefault();
+        let id = this.props.match.params.id;
         console.log(this.state.hero)
-        axios.put('/api/hero', this.state.hero)
+        axios.put(`/api/hero/${id}`, this.state.hero)
         .then(response => {
             this.setState({
                 editIconOn: !this.state.editIconOn,
@@ -148,7 +147,7 @@ class IndividualHero extends Component{
                             <form className={classes.info}>
                                 <TextField margin="dense" label="Hero Name" value={this.state.hero.name} onChange={(event)=>this.handleChange(event, 'name')} />
                                 <RadioGroup row id="heroRoleRadio" value={this.state.hero.role} onChange={(event)=>this.handleChange(event, 'role')}>
-                                        <FormControlLabel selected value="Tank" control={<Radio />} label="Tank" />
+                                        <FormControlLabel value="Tank" control={<Radio />} label="Tank" />
                                         <FormControlLabel value="DPS" control={<Radio />} label="DPS" />
                                         <FormControlLabel value="Support" control={<Radio />} label="Support" />
                                 </RadioGroup>

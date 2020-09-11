@@ -48,7 +48,7 @@ class ListMaps extends Component{
                         <NativeSelect defaultValue='All'>
                             <option value='All'>All</option>
                             <option value='Assault'>Assault</option>
-                            <option value='Assault'>Control</option>
+                            <option value='Control'>Control</option>
                             <option value='Escort'>Escort</option>
                             <option value='Hybrid'>Hybrid</option>
                         </NativeSelect>

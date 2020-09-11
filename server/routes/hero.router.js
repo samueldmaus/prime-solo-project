@@ -41,12 +41,12 @@ router.post('/add', rejectUnauthenticated, rejectAdmin, (req, res) => {
 });
 
 // route to update hero information on db
-router.put('/', rejectUnauthenticated, rejectAdmin, (req, res) => {
+router.put('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
     let hero = req.body;
     let queryText = `UPDATE "heroes" SET "name" = $1, "role" = $2, "image" = $3, "ability_one" = $4, "ability_two" = $5, "ability_three" = $6,
     "ability_four" = $7, "ability_ult" = $8
     WHERE "id" = $9;`;
-    pool.query(queryText, [hero.name, hero.role, hero.image, hero.ability_one, hero.ability_two, hero.ability_three, hero.ability_four, hero.ability_ult, hero.id])
+    pool.query(queryText, [hero.name, hero.role, hero.image, hero.ability_one, hero.ability_two, hero.ability_three, hero.ability_four, hero.ability_ult, req.params.id])
     .then(result => {
         res.sendStatus(201);
     }).catch(error => {

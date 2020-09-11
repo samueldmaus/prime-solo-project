@@ -48,6 +48,19 @@ router.delete('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
     }).catch(error => {
         res.sendStatus(500);
     })
+});
+
+router.put('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
+    let map = req.body;
+    let queryText = `UPDATE "maps"
+    SET "name" = $1, "type" = $2, "image" = $3, "description" = $4
+    WHERE "id" = $5;`;
+    pool.query(queryText, [map.name, map.type, map.image, map.description, req.params.id])
+    .then(result => {
+        res.sendStatus(201);
+    }).catch(error => {
+        res.sendStatus(500);
+    })
 })
 
 module.exports = router;
