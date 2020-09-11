@@ -2,9 +2,10 @@ const express = require('express');
 const pool = require('../modules/pool');
 const { query } = require('../modules/pool');
 const router = express.Router();
+const {rejectUnauthenticated, rejectAdmin} = require('../modules/authentication-middleware');
 
 // route to get all the hero information
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "heroes"
     ORDER BY "role" DESC;`;
     pool.query(queryText).then(result => {
@@ -15,7 +16,7 @@ router.get('/', (req, res) => {
 });
 
 // route to get individual hero information
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "heroes"
     WHERE "id" = $1;`;
     pool.query(queryText, [req.params.id])
@@ -27,7 +28,7 @@ router.get('/:id', (req, res) => {
 })
 
 // route to post new hero to db
-router.post('/add', (req, res) => {
+router.post('/add', rejectUnauthenticated, rejectAdmin, (req, res) => {
     let hero = req.body;
     let queryText = `INSERT INTO "heroes" ("name", "role", "image", "ability_one", "ability_two", "ability_three", "ability_four", "ability_ult")
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
@@ -40,7 +41,7 @@ router.post('/add', (req, res) => {
 });
 
 // route to update hero information on db
-router.put('/', (req, res) => {
+router.put('/', rejectUnauthenticated, rejectAdmin, (req, res) => {
     let hero = req.body;
     let queryText = `UPDATE "heroes" SET "name" = $1, "role" = $2, "image" = $3, "ability_one" = $4, "ability_two" = $5, "ability_three" = $6,
     "ability_four" = $7, "ability_ult" = $8
@@ -54,7 +55,7 @@ router.put('/', (req, res) => {
 })
 
 // route to delete hero from db
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
     let queryText = `DELETE FROM "heroes"
     WHERE "id" = $1;`;
     pool.query(queryText, [req.params.id])

@@ -1,9 +1,10 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {rejectUnauthenticated, rejectAdmin} = require('../modules/authentication-middleware');
 
 // route to post new map to db
-router.post('/add', (req, res) => {
+router.post('/add', rejectUnauthenticated, rejectAdmin, (req, res) => {
     let map = req.body;
     let queryText = `INSERT INTO "maps" ("name", "type", "image", "description")
     VALUES ($1, $2, $3, $4);`;
@@ -16,7 +17,7 @@ router.post('/add', (req, res) => {
 });
 
 // route to get all map information from db
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "maps";`;
     pool.query(queryText).then(result => {
         res.send(result.rows);
@@ -25,7 +26,7 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "maps"
     WHERE "id" = $1;`;
     pool.query(queryText, [req.params.id])
