@@ -11,7 +11,8 @@ const styles = theme => ({
   },
   media: {
     height: 400,
-    margin: 10
+    margin: 10,
+
   }
 })
 
