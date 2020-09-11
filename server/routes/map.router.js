@@ -23,6 +23,17 @@ router.get('/', (req, res) => {
     }).catch(error => {
         res.sendStatus(500);
     })
+});
+
+router.get('/:id', (req, res) => {
+    let queryText = `SELECT * FROM "maps"
+    WHERE "id" = $1;`;
+    pool.query(queryText, [req.params.id])
+    .then(result => {
+        res.send(result.rows)
+    }).catch(error => {
+        res.sendStatus(500)
+    })
 })
 
 module.exports = router;

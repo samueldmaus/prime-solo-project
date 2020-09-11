@@ -14,13 +14,16 @@ const styles = theme => ({
         textAlign: 'left'
     },
     image: {
-        width: 200,
-        height: 100,
+        width: 210,
+        height: 120,
         borderRadius: '10%',
         margin: 5
     },
     imageDiv: {
         textAlign: 'center'
+    },
+    info: {
+        float: 'right'
     }
 })
 
@@ -28,6 +31,13 @@ class ListMaps extends Component{
     componentDidMount(){
         this.props.dispatch({type: "FETCH_MAPS"})
     }
+
+    // function to view individual map
+    viewMap = (map) => {
+        console.log(map);
+        this.props.history.push(`/maps/${map.id}`)
+    }
+
     render(){
         const {classes} = this.props;
         return (
@@ -53,7 +63,7 @@ class ListMaps extends Component{
                             <div className={classes.imageDiv}>
                             <img className={classes.image} src={map.image} alt={map.name} />
                             </div>
-                            <IconButton><InfoIcon></InfoIcon></IconButton>
+                            <IconButton className={classes.info} onClick={()=>this.viewMap(map)}><InfoIcon></InfoIcon></IconButton>
                         </Card>
                     </Grid>  
                     ))}

@@ -1,4 +1,4 @@
-const individualHeroReducer = (state = {}, action) => {
+const individualHeroReducer = (state = [], action) => {
     if(action.type === "SAVE_IND_HERO") {
         return action.payload
     } 

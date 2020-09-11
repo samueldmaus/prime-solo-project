@@ -3,7 +3,8 @@ import errors from './errors.reducer';
 import user from './user.reducer';
 import heroes from './heroes.reducer'
 import individualHero from './ind_hero.reducer';
-import maps from './maps.reducer'
+import maps from './maps.reducer';
+import individualMap from './ind_map.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   user, // will have an id and username if someone is logged in
   heroes,
   individualHero,
-  maps
+  maps,
+  individualMap,
 });
 
 export default rootReducer;
