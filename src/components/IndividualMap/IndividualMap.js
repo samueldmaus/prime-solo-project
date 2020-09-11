@@ -131,7 +131,7 @@ class IndividualMap extends Component{
                             </>
                         ) : (
                             map &&
-                                <form>
+                                <form className={classes.info}>
                                     <TextField margin="dense" label="Map Name" value={this.state.map.name} onChange={(event)=>this.handleChange(event, 'name')}/>
                                     <RadioGroup row id="mapTypeRadio" value={this.state.map.type} onChange={(event)=>this.handleChange(event, 'type')}>
                                         <FormControlLabel value="Assault" control={<Radio />} label="Assault" />
