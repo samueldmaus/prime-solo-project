@@ -7,6 +7,7 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
+import FavoriteIcon from '@material-ui/icons/Favorite'
 import axios from 'axios';
 
 const styles = theme => ({
@@ -133,8 +134,15 @@ class IndividualHero extends Component{
                             </Grid>
                             </Grid>
                             <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
-                            <IconButton onClick={()=>this.deleteHero(hero)}><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
-                            <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
+                            {this.props.store.user.isAdmin ? (
+                                <>
+                                    <IconButton onClick={()=>this.deleteHero(hero)}><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
+                                    <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
+                                </>
+                            ) : (
+                                <IconButton><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                            )}
+                            
                         </>) :
                         (hero && <>
                             <form className={classes.info}>
