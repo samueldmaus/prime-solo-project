@@ -30,6 +30,9 @@ const styles = theme => ({
     },
     title: {
         color: '#f99e1a'
+    },
+    favorite: {
+        color: 'red'
     }
 });
 
@@ -107,6 +110,14 @@ class IndividualHero extends Component{
        }).catch(error => {
            console.log('error in HERO DELETE', error)
        })
+    };
+
+    //favorite hero for the logged in user
+    favoriteHero = (hero) => {
+        let heroId = hero.id;
+        let userId = this.props.store.user.id;
+        axios.put(`/api/hero/${heroId}/${userId}`)
+        
     }
 
     render(){
@@ -139,7 +150,7 @@ class IndividualHero extends Component{
                                     <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                                 </>
                             ) : (
-                                <IconButton><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                                <IconButton onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
                             )}
                             
                         </>) :

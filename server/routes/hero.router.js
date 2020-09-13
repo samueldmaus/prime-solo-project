@@ -64,6 +64,18 @@ router.delete('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
     }).catch(error => {
         res.sendStatus(500)
     })
+});
+
+// route for favoriting a hero
+router.put('/:heroId/:userId', rejectUnauthenticated, (req, res) => {
+    queryText = `INSERT INTO "hero_favorites" ("user_id", "hero_id")
+    VALUES ($1, $2);`;
+    pool.query(queryText, [req.params.userId, req.params.heroId])
+    .then(result => {
+        res.sendStatus(200);
+    }).catch(error => {
+        res.sendStatus(500);
+    })
 })
 
 module.exports = router;
