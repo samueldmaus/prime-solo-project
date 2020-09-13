@@ -30,9 +30,6 @@ const styles = theme => ({
     },
     title: {
         color: '#f99e1a'
-    },
-    favorite: {
-        color: 'red'
     }
 });
 
@@ -40,10 +37,13 @@ class IndividualHero extends Component{
     componentDidMount(){
         let id = this.props.match.params.id;
         this.props.dispatch({type: "GET_IND_HERO", payload: id});
+        this.props.dispatch({type: "FETCH_HERO_FAVORITES", payload: this.props.store.user.id});
+        this.isHeroFavorited();
     }
 
     state = {
         editIconOn: true,
+        favoritedHero: false,
         hero: {
             name: '',
             role: '',
@@ -60,6 +60,7 @@ class IndividualHero extends Component{
     editMode = () => {
         this.setState({
             editIconOn: !this.state.editIconOn,
+            ...this.state,
             hero: {
                 name: this.props.store.individualHero[0].name,
                 role: this.props.store.individualHero[0].role,
@@ -93,6 +94,7 @@ class IndividualHero extends Component{
         .then(response => {
             this.setState({
                 editIconOn: !this.state.editIconOn,
+                ...this.state,
                 ...this.state.hero
             })
             let id = this.props.match.params.id;
@@ -118,6 +120,11 @@ class IndividualHero extends Component{
         let userId = this.props.store.user.id;
         axios.put(`/api/hero/${heroId}/${userId}`)
         
+    };
+
+    //checks to see if hero is favorited
+    isHeroFavorited = () => {
+        console.log(this.state)
     }
 
     render(){
@@ -149,8 +156,13 @@ class IndividualHero extends Component{
                                     <IconButton onClick={()=>this.deleteHero(hero)}><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
                                     <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                                 </>
-                            ) : (
-                                <IconButton onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                            ) : ( this.props.store.heroes &&
+                                    this.state.favoritedHero ? (
+                                        <IconButton color="secondary" onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                                    ) : (
+                                        <IconButton onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                                    )
+                                
                             )}
                             
                         </>) :

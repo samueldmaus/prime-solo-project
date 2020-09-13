@@ -24,7 +24,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
     WHERE "hero_favorites".user_id = $1;`;
     pool.query(queryText, [req.params.id])
     .then(result => {
-        console.log(result.rows)
         res.send(result.rows);
     }).catch(error => {
         res.sendStatus(500)
