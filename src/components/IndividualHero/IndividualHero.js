@@ -118,13 +118,13 @@ class IndividualHero extends Component{
     favoriteHero = (hero) => {
         let heroId = hero.id;
         let userId = this.props.store.user.id;
-        axios.put(`/api/hero/${heroId}/${userId}`)
+        axios.put(`/api/favhero/${heroId}/${userId}`)
         
     };
 
     //checks to see if hero is favorited
     isHeroFavorited = () => {
-        console.log(this.state)
+        console.log(this.props.store.heroes, this.props.store.individualHero)
     }
 
     render(){
