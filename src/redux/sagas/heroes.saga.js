@@ -10,8 +10,19 @@ function* fetchHeroes(){
     }
 }
 
+function* fetchHeroFavorites(action){
+    let id = action.payload
+    try{
+        let response = yield axios.get(`/api/favhero/${id}`);
+        yield put({type: "SET_HERO_FAVORITES", payload: response.data})
+    }catch(error){
+        console.log('error in HERO FAVORITE SAGA GET:', error)
+    }
+}
+
 function* heroSaga() {
-    yield takeEvery('FETCH_HEROES', fetchHeroes)
+    yield takeEvery('FETCH_HEROES', fetchHeroes);
+    yield takeEvery('FETCH_HERO_FAVORITES', fetchHeroFavorites);
 }
 
 export default heroSaga;
