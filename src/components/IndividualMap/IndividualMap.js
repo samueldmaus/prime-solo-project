@@ -85,6 +85,7 @@ class IndividualMap extends Component{
         })
     };
 
+    // function to update the map information in db and flip back to view mode
     updateMap = (event) => {
         event.preventDefault();
         let id = this.props.match.params.id;
@@ -101,8 +102,14 @@ class IndividualMap extends Component{
         })
     };
 
+    // function to add map to user's favorite
     favoriteMap = (map) => {
         this.props.dispatch({type: "SAVE_FAV_MAP", payload: map.id})
+    };
+
+    // function to remove map from user's favorite
+    removeMapFavorite = (map) => {
+        this.props.dispatch({type: "DELETE_FAV_MAP", payload: map.id})
     }
 
     render(){
@@ -137,7 +144,7 @@ class IndividualMap extends Component{
                                         <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                                     </>
                                 ) : ( isFavorited ? (
-                                    <IconButton color="secondary" onClick={()=>this.favoriteMap(map)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                                    <IconButton color="secondary" onClick={()=>this.removeMapFavorite(map)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
                                 ) : (
                                     <IconButton onClick={()=>this.favoriteMap(map)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
                                 )

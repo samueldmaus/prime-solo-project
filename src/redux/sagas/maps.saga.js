@@ -23,7 +23,7 @@ function* fetchMapFavorites(){
 function* fetchIndividualMap(action){
     try {
         let response = yield axios.get(`/api/map/ind/${action.payload}`);
-        yield put ({type: "SAVE_IND_MAP", payload: response.data})
+        yield put ({type: "SAVE_IND_MAP", payload: response.data});
     }catch(error){
         console.log('error in IND MAP SAGA:', error)
     }
@@ -32,9 +32,18 @@ function* fetchIndividualMap(action){
 function* saveFavoriteMap(action){
     try{
         yield axios.put(`/api/favmap/${action.payload}`);
-        yield put({type: 'FETCH_MAP_FAVORITES'})
+        yield put({type: 'FETCH_MAP_FAVORITES'});
     }catch(error){
         console.log('error in SAVE MAP FAVORITE SAGA', error)
+    }
+};
+
+function* deleteFavoriteMap(action){
+    try{
+        yield axios.delete(`/api/favmap/${action.payload}`);
+        yield put({type: 'FETCH_MAP_FAVORITES'});
+    }catch(error){
+        console.log('error in DELET MAP FAVORITE SAGA:', error)
     }
 }
 
@@ -42,6 +51,7 @@ function* mapSaga(){
     yield takeEvery('FETCH_MAPS', fetchMaps);
     yield takeEvery("GET_IND_MAP", fetchIndividualMap);
     yield takeEvery("SAVE_FAV_MAP", saveFavoriteMap);
+    yield takeEvery('DELETE_FAV_MAP', deleteFavoriteMap);
     yield takeEvery('FETCH_MAP_FAVORITES', fetchMapFavorites)
 }
 
