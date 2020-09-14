@@ -115,6 +115,11 @@ class IndividualHero extends Component{
         this.props.dispatch({type:"SAVE_FAV_HERO", payload: hero.id});
     };
 
+    //remove hero from user's favorites
+    removeHeroFavorite = (hero) => {
+        this.props.dispatch({type: "DELETE_FAV_HERO", payload: hero.id})
+    }
+
 
     render(){
         const {classes} = this.props;
@@ -152,7 +157,7 @@ class IndividualHero extends Component{
                                     <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                                 </>
                             ) : ( isFavorite ? (
-                                <IconButton color="secondary" onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                                <IconButton color="secondary" onClick={()=>this.removeHeroFavorite(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
                             ) : (
                                 <IconButton onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
                             )
