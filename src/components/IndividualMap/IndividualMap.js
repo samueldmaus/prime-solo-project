@@ -109,7 +109,13 @@ class IndividualMap extends Component{
 
     render(){
         const {classes} = this.props;
-        let map = this.props.store.individualMap
+        let map = this.props.store.individualMap;
+        let isFavorited = false;
+        for(let i = 0; i < this.props.store.favMaps.length; i++){
+            if(map.id === this.props.store.favMaps[i].id){
+                isFavorited = true
+            }
+        }
         return (
             <>
                 <Card className={classes.card}>
@@ -132,8 +138,11 @@ class IndividualMap extends Component{
                                         <IconButton onClick={()=>this.deleteMap(map)}><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
                                         <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                                     </>
+                                ) : ( isFavorited ? (
+                                    <IconButton color="secondary" onClick={()=>this.favoriteMap(map)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
                                 ) : (
                                     <IconButton onClick={()=>this.favoriteMap(map)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                                )
                                 )}
                             </>
                         ) : (
