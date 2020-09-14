@@ -4,10 +4,10 @@ const router = express.Router();
 const {rejectUnauthenticated, rejectAdmin} = require('../modules/authentication-middleware');
 
 // route to add map to user favorites
-router.put('/:mapId/:userId', rejectUnauthenticated, (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
     let queryText = `INSERT INTO "map_favorites" ("user_id", "map_id")
     VALUES ($1, $2);`;
-    pool.query(queryText, [req.params.userId, req.params.mapId])
+    pool.query(queryText, [req.user.id, req.params.id])
     .then(result => {
         res.sendStatus(200);
     }).catch(error => {

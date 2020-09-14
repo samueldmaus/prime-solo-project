@@ -102,9 +102,7 @@ class IndividualMap extends Component{
     };
 
     favoriteMap = (map) => {
-        let userId = this.props.store.user.id;
-        let mapId = map.id;
-        axios.put(`/api/favmap/${mapId}/${userId}`)
+        this.props.dispatch({type: "SAVE_FAV_MAP", payload: map.id})
     }
 
     render(){

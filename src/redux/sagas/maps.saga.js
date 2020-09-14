@@ -27,11 +27,21 @@ function* fetchIndividualMap(action){
     }catch(error){
         console.log('error in IND MAP SAGA:', error)
     }
+};
+
+function* saveFavoriteMap(action){
+    try{
+        yield axios.put(`/api/favmap/${action.payload}`);
+        yield put({type: 'FETCH_MAP_FAVORITES'})
+    }catch(error){
+        console.log('error in SAVE MAP FAVORITE SAGA', error)
+    }
 }
 
 function* mapSaga(){
     yield takeEvery('FETCH_MAPS', fetchMaps);
     yield takeEvery("GET_IND_MAP", fetchIndividualMap);
+    yield takeEvery("SAVE_FAV_MAP", saveFavoriteMap);
     yield takeEvery('FETCH_MAP_FAVORITES', fetchMapFavorites)
 }
 
