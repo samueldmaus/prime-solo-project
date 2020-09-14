@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* fetchIndividualHero(action){
     try
-        {let response = yield axios.get(`/api/hero/${action.payload}`);
+        {let response = yield axios.get(`/api/hero/ind/${action.payload}`);
         yield put({type: "SAVE_IND_HERO", payload: response.data})
     }catch(error) {
         console.log('error in INDIVIDUAL HERO SAGA:', error)

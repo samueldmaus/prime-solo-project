@@ -28,7 +28,7 @@ router.get('/:role', rejectUnauthenticated, (req, res) => {
 });
 
 // route to get individual hero information
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/ind/:id', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT * FROM "heroes"
     WHERE "id" = $1;`;
     pool.query(queryText, [req.params.id])

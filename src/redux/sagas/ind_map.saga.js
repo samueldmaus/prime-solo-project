@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function* fetchIndividualMap(action){
     try {
-        let response = yield axios.get(`/api/map/${action.payload}`);
+        let response = yield axios.get(`/api/map/ind/${action.payload}`);
         yield put ({type: "SAVE_IND_MAP", payload: response.data})
     }catch(error){
         console.log('error in IND MAP SAGA:', error)

@@ -41,7 +41,7 @@ class MyAccount extends Component{
                     <Grid item xs={6} className={classes.infoDiv} key={hero.id}>
                       <Avatar alt={hero.name} src={hero.image} />
                       <h4 className={classes.name}>{hero.name} - {hero.role}</h4>
-                      <IconButton><InfoIcon></InfoIcon></IconButton>
+                      <IconButton onClick={()=>this.props.history.push(`/heroes/${hero.id}`)}><InfoIcon></InfoIcon></IconButton>
                     </Grid>
                 ))}
               </Grid>
@@ -57,7 +57,7 @@ class MyAccount extends Component{
                     <Grid item xs={6} className={classes.infoDiv} key={map.id}>
                       <Avatar alt={map.name} src={map.image} />
                       <h4 className={classes.name}>{map.name} - {map.type}</h4>
-                      <IconButton><InfoIcon></InfoIcon></IconButton>
+                      <IconButton onClick={()=>this.props.history.push(`/maps/${map.id}`)}><InfoIcon></InfoIcon></IconButton>
                     </Grid>
                 ))}
               </Grid>
