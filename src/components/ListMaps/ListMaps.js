@@ -29,13 +29,17 @@ const styles = theme => ({
 
 class ListMaps extends Component{
     componentDidMount(){
-        this.props.dispatch({type: "FETCH_MAPS"})
+        this.props.dispatch({type: "FETCH_MAPS", payload: document.getElementById('typeSelect').value})
     }
 
     // function to view individual map
     viewMap = (map) => {
         console.log(map);
         this.props.history.push(`/maps/${map.id}`)
+    };
+
+    handleTypeSelectChange = () => {
+        this.props.dispatch({type: "FETCH_MAPS", payload: document.getElementById('typeSelect').value})
     }
 
     render(){
@@ -45,7 +49,7 @@ class ListMaps extends Component{
                 <div className={classes.title}>
                     <h1>Overwatch Maps</h1>
                     <FormControl onChange={this.handleRoleSearch}>
-                        <NativeSelect defaultValue='All'>
+                        <NativeSelect id="typeSelect" onChange={this.handleTypeSelectChange} >
                             <option value='All'>All</option>
                             <option value='Assault'>Assault</option>
                             <option value='Control'>Control</option>

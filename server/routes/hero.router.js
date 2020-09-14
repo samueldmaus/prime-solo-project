@@ -8,7 +8,7 @@ const {rejectUnauthenticated, rejectAdmin} = require('../modules/authentication-
 router.get('/:role', rejectUnauthenticated, (req, res) => {
     if(req.params.role === 'All'){
         let queryText = `SELECT * FROM "heroes"
-        ORDER BY "role" DESC;`;
+        ORDER BY "role" DESC, "name" ASC;`;
         pool.query(queryText).then(result => {
             res.send(result.rows)
         }).catch(error => {
@@ -17,7 +17,7 @@ router.get('/:role', rejectUnauthenticated, (req, res) => {
     } else{
         let queryText = `SELECT * FROM "heroes"
         WHERE "role" = $1
-        ORDER By "id";`;
+        ORDER By "name" ASC;`;
         pool.query(queryText, [req.params.role])
         .then(result => {
             res.send(result.rows);

@@ -17,13 +17,26 @@ router.post('/add', rejectUnauthenticated, rejectAdmin, (req, res) => {
 });
 
 // route to get all map information from db
-router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * FROM "maps";`;
-    pool.query(queryText).then(result => {
-        res.send(result.rows);
-    }).catch(error => {
-        res.sendStatus(500);
-    })
+router.get('/:type', rejectUnauthenticated, (req, res) => {
+    if(req.params.type === 'All'){
+        let queryText = `SELECT * FROM "maps"
+        ORDER BY "name" ASC;`;
+        pool.query(queryText).then(result => {
+            res.send(result.rows);
+        }).catch(error => {
+            res.sendStatus(500);
+        })
+    } else {
+        let queryText = `SELECT * FROM "maps"
+        WHERE "type" = $1
+        ORDER By "name" ASC;`;
+        pool.query(queryText, [req.params.type])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(error => {
+            res.sendStatus(500);
+        })
+    }
 });
 
 // route to get individual map info

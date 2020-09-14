@@ -1,9 +1,10 @@
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* fetchMaps(){
+function* fetchMaps(action){
+    let type = action.payload;
     try {
-        let response = yield axios.get('/api/map');
+        let response = yield axios.get(`/api/map/${type}`);
         yield put({type: "SAVE_MAPS", payload: response.data})
     }catch(error){
         console.log('error in MAP SAGA:', error)
