@@ -16,12 +16,12 @@ router.put('/:mapId/:userId', rejectUnauthenticated, (req, res) => {
 });
 
 // route to get user map favorites
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT "maps".id, "maps".name, "maps".type, "maps".image, "maps".description FROM "maps"
     JOIN "map_favorites" ON "maps".id = "map_favorites".map_id
     JOIN "user" on "user".id = "map_favorites".user_id
     WHERE "map_favorites".user_id = $1;`;
-    pool.query(queryText, [req.params.id])
+    pool.query(queryText, [req.user.id])
     .then(result => {
         res.send(result.rows)
     }).catch(error => {

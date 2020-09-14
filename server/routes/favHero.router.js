@@ -16,14 +16,14 @@ router.put('/:heroId/:userId', rejectUnauthenticated, (req, res) => {
 });
 
 // route to get user's favorite heroes
-router.get('/:id', rejectUnauthenticated, (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let queryText = `SELECT "heroes".id, "heroes".name, "heroes".role, "heroes".image, "heroes".ability_one, "heroes".ability_two, 
     "heroes".ability_three, "heroes".ability_four, "heroes".ability_ult FROM "heroes"
     JOIN "hero_favorites" ON "heroes".id = "hero_favorites".hero_id
     JOIN "user" ON "user".id = "hero_favorites".user_id
     WHERE "hero_favorites".user_id = $1
     ORDER BY "heroes".role DESC;`;
-    pool.query(queryText, [req.params.id])
+    pool.query(queryText, [req.user.id])
     .then(result => {
         res.send(result.rows);
     }).catch(error => {

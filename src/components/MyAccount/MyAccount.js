@@ -24,8 +24,8 @@ const styles = theme => ({
 })
 class MyAccount extends Component{
   componentDidMount(){
-    this.props.dispatch({type: "FETCH_HERO_FAVORITES", payload: this.props.store.user.id});
-    this.props.dispatch({type: "FETCH_MAP_FAVORITES", payload: this.props.store.user.id})
+    this.props.dispatch({type: "FETCH_HERO_FAVORITES"});
+    this.props.dispatch({type: "FETCH_MAP_FAVORITES"})
   };
 
   render(){
@@ -37,7 +37,7 @@ class MyAccount extends Component{
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/2ZyfEbz" /><h3>FAVORITE HEROES</h3></AccordionSummary>
             <AccordionDetails className={classes.card}>
               <Grid>
-                {this.props.store.heroes.map(hero => (
+                {this.props.store.favHeroes.map(hero => (
                     <Grid item xs={6} className={classes.infoDiv} key={hero.id}>
                       <Avatar alt={hero.name} src={hero.image} />
                       <h4 className={classes.name}>{hero.name} - {hero.role}</h4>

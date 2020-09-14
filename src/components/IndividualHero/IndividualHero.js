@@ -37,13 +37,11 @@ class IndividualHero extends Component{
     componentDidMount(){
         let id = this.props.match.params.id;
         this.props.dispatch({type: "GET_IND_HERO", payload: id});
-        this.props.dispatch({type: "FETCH_HERO_FAVORITES", payload: this.props.store.user.id});
-        this.isHeroFavorited();
+        this.props.dispatch({type: "FETCH_HERO_FAVORITES"});
     }
 
     state = {
         editIconOn: true,
-        favoritedHero: false,
         hero: {
             name: '',
             role: '',
@@ -61,14 +59,14 @@ class IndividualHero extends Component{
         this.setState({
             editIconOn: !this.state.editIconOn,
             hero: {
-                name: this.props.store.individualHero[0].name,
-                role: this.props.store.individualHero[0].role,
-                image: this.props.store.individualHero[0].image,
-                ability_one: this.props.store.individualHero[0].ability_one,
-                ability_two: this.props.store.individualHero[0].ability_two,
-                ability_three: this.props.store.individualHero[0].ability_three,
-                ability_four: this.props.store.individualHero[0].ability_four,
-                ability_ult: this.props.store.individualHero[0].ability_ult
+                name: this.props.store.individualHero.name,
+                role: this.props.store.individualHero.role,
+                image: this.props.store.individualHero.image,
+                ability_one: this.props.store.individualHero.ability_one,
+                ability_two: this.props.store.individualHero.ability_two,
+                ability_three: this.props.store.individualHero.ability_three,
+                ability_four: this.props.store.individualHero.ability_four,
+                ability_ult: this.props.store.individualHero.ability_ult
             }
         })
     };
@@ -116,18 +114,19 @@ class IndividualHero extends Component{
     favoriteHero = (hero) => {
         let heroId = hero.id;
         let userId = this.props.store.user.id;
-        axios.put(`/api/favhero/${heroId}/${userId}`)
-        
+        axios.put(`/api/favhero/${heroId}/${userId}`) ;
     };
 
-    //checks to see if hero is favorited
-    isHeroFavorited = () => {
-        console.log(this.props.store.heroes, this.props.store.individualHero)
-    }
 
     render(){
         const {classes} = this.props;
-        let hero = this.props.store.individualHero[0];
+        let hero = this.props.store.individualHero;
+        let isFavorite = false
+        for(let i = 0; i < this.props.store.favHeroes.length; i++){
+            if(hero.id === this.props.store.favHeroes[i].id){
+                isFavorite = true
+            }
+        }
         return(
             <>
                 <Card className={classes.card}>
@@ -148,14 +147,17 @@ class IndividualHero extends Component{
                                     </div>
                                 </Grid>
                             </Grid>
-                            <IconButton onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
+                            <IconButton onLoad={()=>this.isHeroFavorited()} onClick={()=>this.props.history.push('/heroes')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
                             {this.props.store.user.isAdmin ? (
                                 <>
                                     <IconButton onClick={()=>this.deleteHero(hero)}><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
                                     <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                                 </>
+                            ) : ( isFavorite ? (
+                                <IconButton color="secondary" onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
                             ) : (
-                                    <IconButton color="secondary" onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                                <IconButton onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                            )
 
                             )}
                             

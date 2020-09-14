@@ -37,7 +37,8 @@ const styles = theme => ({
 class IndividualMap extends Component{
     componentDidMount(){
         let id = this.props.match.params.id;
-        this.props.dispatch({type: "GET_IND_MAP", payload: id})
+        this.props.dispatch({type: "GET_IND_MAP", payload: id});
+        
     }
 
     state = {
