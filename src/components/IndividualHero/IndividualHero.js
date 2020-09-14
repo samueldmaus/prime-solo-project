@@ -26,7 +26,7 @@ const styles = theme => ({
 
     },
     header: {
-        backgroundColor: '#f99e1a',
+        backgroundImage: 'linear-gradient(to left, rgba(255,0,0,0), rgba(250, 156,29))',
     },
     title: {
         color: '#f99e1a'
