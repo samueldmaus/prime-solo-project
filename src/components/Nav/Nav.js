@@ -19,6 +19,7 @@ const Nav = (props) => {
   return (
     <div className="nav">
       <Link to="/home">
+        <img id="navLogo" width="64" alt="Overwatch circle logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/55/Overwatch_circle_logo.svg/512px-Overwatch_circle_logo.svg.png"/>
         <h2 className="nav-title">Start Overwatch</h2>
       </Link>
       <div className="nav-right">

@@ -4,34 +4,44 @@
     display: inline-block;
     color: #f2f2f2;
     padding-left: 10px;
+    vertical-align: top;
 }
 
 .nav {
   margin: 0 0 30px;
-  background-color: #f99e1a;
+  background-color: black;
   overflow: hidden;
 }
 
 .nav-link {
   float: left;
-  color: #f2f2f2;
-  background-color: #f99e1a;
+  color: rgba(250,156, 29);
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
   font-size: 15px;
-
+  background-color: black;
   /* these last two make the logout button in
   the nav bar look like another link */
   border:none;
   cursor: pointer;
   outline:0;
+  
 }
 
+
 .nav-link:hover {
-  background-color: #f99e1a;
+  background-color: black;
+  border-radius: 50%
 }
 
 .nav-right {
   float: right;
+}
+
+#navLogo {
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px
 }
