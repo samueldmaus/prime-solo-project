@@ -112,9 +112,7 @@ class IndividualHero extends Component{
 
     //favorite hero for the logged in user
     favoriteHero = (hero) => {
-        let heroId = hero.id;
-        let userId = this.props.store.user.id;
-        axios.put(`/api/favhero/${heroId}/${userId}`) ;
+        this.props.dispatch({type:"SAVE_FAV_HERO", payload: hero.id});
     };
 
 
