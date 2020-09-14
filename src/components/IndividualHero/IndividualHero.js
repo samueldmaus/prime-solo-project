@@ -60,7 +60,6 @@ class IndividualHero extends Component{
     editMode = () => {
         this.setState({
             editIconOn: !this.state.editIconOn,
-            ...this.state,
             hero: {
                 name: this.props.store.individualHero[0].name,
                 role: this.props.store.individualHero[0].role,
@@ -94,7 +93,6 @@ class IndividualHero extends Component{
         .then(response => {
             this.setState({
                 editIconOn: !this.state.editIconOn,
-                ...this.state,
                 ...this.state.hero
             })
             let id = this.props.match.params.id;
@@ -156,13 +154,9 @@ class IndividualHero extends Component{
                                     <IconButton onClick={()=>this.deleteHero(hero)}><DeleteIcon fontSize="large"></DeleteIcon></IconButton>
                                     <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                                 </>
-                            ) : ( this.props.store.heroes &&
-                                    this.state.favoritedHero ? (
-                                        <IconButton color="secondary" onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
-                                    ) : (
-                                        <IconButton onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
-                                    )
-                                
+                            ) : (
+                                    <IconButton color="secondary" onClick={()=>this.favoriteHero(hero)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+
                             )}
                             
                         </>) :

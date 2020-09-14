@@ -4,15 +4,27 @@ const { query } = require('../modules/pool');
 const router = express.Router();
 const {rejectUnauthenticated, rejectAdmin} = require('../modules/authentication-middleware');
 
-// route to get all the hero information
-router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * FROM "heroes"
-    ORDER BY "role" DESC;`;
-    pool.query(queryText).then(result => {
-        res.send(result.rows)
-    }).catch(error => {
-        res.sendStatus(500)
-    })
+// route to get all the hero information or get info for hero by selected role
+router.get('/:role', rejectUnauthenticated, (req, res) => {
+    if(req.params.role === 'All'){
+        let queryText = `SELECT * FROM "heroes"
+        ORDER BY "role" DESC;`;
+        pool.query(queryText).then(result => {
+            res.send(result.rows)
+        }).catch(error => {
+            res.sendStatus(500)
+        })
+    } else{
+        let queryText = `SELECT * FROM "heroes"
+        WHERE "role" = $1
+        ORDER By "id";`;
+        pool.query(queryText, [req.params.role])
+        .then(result => {
+            res.send(result.rows);
+        }).catch(error => {
+            res.sendStatus(500);
+        })
+    }
 });
 
 // route to get individual hero information

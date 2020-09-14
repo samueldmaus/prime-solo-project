@@ -13,7 +13,7 @@ const AboutPage = () => (
         hero abilities and interactions in Overwatch. All of the hereos in the game are described in detail, including their abilities, matching hero picks, and 
         counter hero picks. 
 
-        In addition to the heroes, all of the maps are listed to view. Each map includes the map type, a short description of the map, and list of heroes that typically
+        In addition to the heroes, all of the maps are listed for viewing. Each map includes the map type, a short description of the map, and a list of heroes that typically
         perform well on that specific map. Users can create an account and save their favorite heroes and maps for easy reference later!
       </p>
       <img src="https://bit.ly/2Fksrrk" alt="Overwatch Heroes" id="aboutPic"/>

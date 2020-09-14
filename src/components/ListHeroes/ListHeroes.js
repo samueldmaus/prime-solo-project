@@ -22,18 +22,12 @@ const styles = theme => ({
 
 class ListHeroes extends Component{
     componentDidMount(){
-        this.setState({
-            heroRole: 'All'
-        });
-        this.props.dispatch({type:"FETCH_HEROES"});
+        this.props.dispatch({type:"FETCH_HEROES", payload: document.getElementById('roleSelect').value});
     };
-
-    state = {
-        heroRole: 'All'
-    };
-
-    handleRoleSearch = (event) => {
-        console.log(event.target.value)
+    
+    // sends request to get heroes by role that is selected
+    hanleRoleSelectChange = () => {
+        this.props.dispatch({type:"FETCH_HEROES", payload: document.getElementById('roleSelect').value})
     };
     
     // sends individual hero to reducer
@@ -49,7 +43,7 @@ class ListHeroes extends Component{
                 <div className={classes.title}>
                     <h1>Overwatch Heroes</h1>
                 <FormControl onChange={this.handleRoleSearch}>
-                    <NativeSelect defaultValue='All'>
+                    <NativeSelect id="roleSelect" onChange={this.hanleRoleSelectChange}>
                         <option value='All'>All</option>
                         <option value='Tank'>Tank</option>
                         <option value='DPS'>DPS</option>

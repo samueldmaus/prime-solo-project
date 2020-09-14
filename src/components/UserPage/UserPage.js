@@ -12,7 +12,9 @@ const styles = theme => ({
   media: {
     height: 400,
     margin: 10,
-
+  },
+  header: {
+    backgroundImage: 'linear-gradient(to left, rgba(255,0,0,0), rgba(250, 156,29))',
   }
 })
 
@@ -30,7 +32,7 @@ class UserPage extends Component {
           <Grid item xs={12}>
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/heroes')}>
-                <CardHeader title="HEROES" />
+                <CardHeader className={classes.header} title="HEROES" />
                 <img className={classes.media} src="https://bit.ly/3bDvFSa" alt="Overwatch Heroes"/>
               </CardActionArea>
             </Card>
@@ -38,7 +40,7 @@ class UserPage extends Component {
           <Grid item xs={12}>
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/maps')}>
-                <CardHeader title="MAPS" />
+                <CardHeader className={classes.header} title="MAPS" />
                 <img className={classes.media} src="https://bit.ly/2FBMQaN" alt="Overwatch Maps" />
               </CardActionArea>
             </Card>
