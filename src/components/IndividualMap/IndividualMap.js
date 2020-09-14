@@ -100,6 +100,12 @@ class IndividualMap extends Component{
         })
     };
 
+    favoriteMap = (map) => {
+        let userId = this.props.store.user.id;
+        let mapId = map.id;
+        axios.put(`/api/favmap/${mapId}/${userId}`)
+    }
+
     render(){
         const {classes} = this.props;
         let map = this.props.store.individualMap[0]
@@ -126,7 +132,7 @@ class IndividualMap extends Component{
                                         <IconButton onClick={this.editMode}><EditIcon fontSize="large"></EditIcon></IconButton>
                                     </>
                                 ) : (
-                                    <IconButton><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
+                                    <IconButton onClick={()=>this.favoriteMap(map)}><FavoriteIcon fontSize="large"></FavoriteIcon></IconButton>
                                 )}
                             </>
                         ) : (

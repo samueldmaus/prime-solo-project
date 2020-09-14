@@ -10,8 +10,19 @@ function* fetchMaps(){
     }
 };
 
+function* fetchMapFavorites(action){
+    let id = action.payload;
+    try {
+        let response = yield axios.get(`/api/favmap/${id}`);
+        yield put({type: "SAVE_MAP_FAVORITES", payload: response.data})
+    }catch(error){
+        console.log('error in FAVORITE MAP SAGA:', error)
+    }
+}
+
 function* mapSaga(){
-    yield takeEvery('FETCH_MAPS', fetchMaps)
+    yield takeEvery('FETCH_MAPS', fetchMaps);
+    yield takeEvery('FETCH_MAP_FAVORITES', fetchMapFavorites)
 }
 
 export default mapSaga;

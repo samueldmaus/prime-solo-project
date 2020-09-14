@@ -21,3 +21,14 @@ CREATE TABLE "heroes" (
 	"ability_ult" VARCHAR (250) NOT NULL
 );
  
+CREATE TABLE "hero_favorites" (
+	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user",
+	"hero_id" INT REFERENCES "heroes"
+);
+
+CREATE TABLE "map_favorites" (
+	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user",
+	"hero_id" INT REFERENCES "maps"
+);

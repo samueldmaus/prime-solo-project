@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles'
-import {Accordion, AccordionDetails, AccordionSummary, Avatar, IconButton} from '@material-ui/core';
+import {Accordion, AccordionDetails, AccordionSummary, Avatar, IconButton, Grid} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoIcon from '@material-ui/icons/Info'
 
@@ -13,10 +13,9 @@ const styles = theme => ({
   pic: {
     margin: 15
   },
-  heroDiv: {
-    flex: 1,
+  infoDiv: {
     display: 'flex',
-    margin: 10
+    margin: 30
   },
   name: {
     margin: 15
@@ -25,7 +24,8 @@ const styles = theme => ({
 })
 class MyAccount extends Component{
   componentDidMount(){
-    this.props.dispatch({type: "FETCH_HERO_FAVORITES", payload: this.props.store.user.id})
+    this.props.dispatch({type: "FETCH_HERO_FAVORITES", payload: this.props.store.user.id});
+    this.props.dispatch({type: "FETCH_MAP_FAVORITES", payload: this.props.store.user.id})
   };
 
   render(){
@@ -35,18 +35,35 @@ class MyAccount extends Component{
         {this.props.store.heroes && 
           <Accordion className={classes.card} >
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/2ZyfEbz" /><h3>FAVORITE HEROES</h3></AccordionSummary>
-            <AccordionDetails>
-              {this.props.store.heroes.map(hero => (
-                <div className={classes.heroDiv} key={hero.id}>
-                  <Avatar alt={hero.name} src={hero.image} />
-                  <h4 className={classes.name}>{hero.name} - {hero.role}</h4>
-                  <IconButton><InfoIcon></InfoIcon></IconButton>
-                </div>
-              ))}
+            <AccordionDetails className={classes.card}>
+              <Grid>
+                {this.props.store.heroes.map(hero => (
+                    <Grid item xs={6} className={classes.infoDiv} key={hero.id}>
+                      <Avatar alt={hero.name} src={hero.image} />
+                      <h4 className={classes.name}>{hero.name} - {hero.role}</h4>
+                      <IconButton><InfoIcon></InfoIcon></IconButton>
+                    </Grid>
+                ))}
+              </Grid>
             </AccordionDetails>
           </Accordion>
         }
-
+        {this.props.store.maps &&
+          <Accordion className={classes.card} >
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/32rZnqz" /><h3>FAVORITE MAPS</h3></AccordionSummary>
+            <AccordionDetails className={classes.card}>
+              <Grid>
+                {this.props.store.maps.map(map => (
+                    <Grid item xs={6} className={classes.infoDiv} key={map.id}>
+                      <Avatar alt={map.name} src={map.image} />
+                      <h4 className={classes.name}>{map.name} - {map.type}</h4>
+                      <IconButton><InfoIcon></InfoIcon></IconButton>
+                    </Grid>
+                ))}
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
+        }
       </>
     )
   }

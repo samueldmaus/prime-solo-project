@@ -5,7 +5,7 @@ const {rejectUnauthenticated, rejectAdmin} = require('../modules/authentication-
 
 // route for favoriting a hero
 router.put('/:heroId/:userId', rejectUnauthenticated, (req, res) => {
-    queryText = `INSERT INTO "hero_favorites" ("user_id", "hero_id")
+    let queryText = `INSERT INTO "hero_favorites" ("user_id", "hero_id")
     VALUES ($1, $2);`;
     pool.query(queryText, [req.params.userId, req.params.heroId])
     .then(result => {
@@ -17,11 +17,12 @@ router.put('/:heroId/:userId', rejectUnauthenticated, (req, res) => {
 
 // route to get user's favorite heroes
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-    queryText = `SELECT "heroes".id, "heroes".name, "heroes".role, "heroes".image, "heroes".ability_one, "heroes".ability_two, 
+    let queryText = `SELECT "heroes".id, "heroes".name, "heroes".role, "heroes".image, "heroes".ability_one, "heroes".ability_two, 
     "heroes".ability_three, "heroes".ability_four, "heroes".ability_ult FROM "heroes"
     JOIN "hero_favorites" ON "heroes".id = "hero_favorites".hero_id
     JOIN "user" ON "user".id = "hero_favorites".user_id
-    WHERE "hero_favorites".user_id = $1;`;
+    WHERE "hero_favorites".user_id = $1
+    ORDER BY "heroes".role DESC;`;
     pool.query(queryText, [req.params.id])
     .then(result => {
         res.send(result.rows);
