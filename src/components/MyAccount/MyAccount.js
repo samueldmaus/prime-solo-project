@@ -53,7 +53,7 @@ class MyAccount extends Component{
             <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/32rZnqz" /><h3>FAVORITE MAPS</h3></AccordionSummary>
             <AccordionDetails className={classes.card}>
               <Grid>
-                {this.props.store.maps.map(map => (
+                {this.props.store.favMaps.map(map => (
                     <Grid item xs={6} className={classes.infoDiv} key={map.id}>
                       <Avatar alt={map.name} src={map.image} />
                       <h4 className={classes.name}>{map.name} - {map.type}</h4>

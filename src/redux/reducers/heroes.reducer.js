@@ -1,5 +1,4 @@
 
-
 const heroesReducer = (state = [], action) => {
     if(action.type === "SET_HEROES") {
         return action.payload

@@ -38,7 +38,7 @@ class IndividualMap extends Component{
     componentDidMount(){
         let id = this.props.match.params.id;
         this.props.dispatch({type: "GET_IND_MAP", payload: id});
-        
+
     }
 
     state = {
@@ -66,10 +66,10 @@ class IndividualMap extends Component{
         this.setState({
             editIconOn: false,
             map: {
-                name: this.props.store.individualMap[0].name,
-                type: this.props.store.individualMap[0].type,
-                image: this.props.store.individualMap[0].image,
-                description: this.props.store.individualMap[0].description
+                name: this.props.store.individualMap.name,
+                type: this.props.store.individualMap.type,
+                image: this.props.store.individualMap.image,
+                description: this.props.store.individualMap.description
             }
         })
     };
@@ -109,7 +109,7 @@ class IndividualMap extends Component{
 
     render(){
         const {classes} = this.props;
-        let map = this.props.store.individualMap[0]
+        let map = this.props.store.individualMap
         return (
             <>
                 <Card className={classes.card}>
