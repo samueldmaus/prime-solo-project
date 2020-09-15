@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles';
-import {Grid, Card, CardHeader, FormControl, NativeSelect, FormHelperText, IconButton} from '@material-ui/core';
+import {Grid, Card, CardHeader, FormControl, NativeSelect, FormHelperText, IconButton, Avatar} from '@material-ui/core';
 import InfoIcon from '@material-ui/icons/Info'
 
 const styles = theme => ({
@@ -13,7 +13,7 @@ const styles = theme => ({
     img: {
         height: 100,
         width: 100,
-        borderRadius: '50%'
+
     },
     title: {
         margin: 5
@@ -58,7 +58,7 @@ class ListHeroes extends Component{
                         <Grid item xs={3} key={hero.id}>
                             <Card className={classes.card}>
                                 <CardHeader title={hero.name} subheader={hero.role} />
-                                <img className={classes.img} src={hero.image} alt={hero.name} />
+                                <Avatar className={classes.img} src={hero.image} alt={hero.name} />
                                 <IconButton onClick={()=>this.viewHero(hero)}><InfoIcon></InfoIcon></IconButton>
                             </Card>
                         </Grid>   

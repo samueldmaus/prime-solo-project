@@ -54,10 +54,8 @@ router.get('/:type', rejectUnauthenticated, (req, res) => {
 
 // route to get individual map info
 router.get('/ind/:id', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT "maps".id, "maps".name, "maps".type, "maps".image, "maps".description, "heroes".id AS "heroId", "heroes".name AS "heroName", "heroes".role AS "heroRole" FROM "maps"
-    JOIN "map_heroes" ON "map_heroes".map_id = "maps".id
-    JOIN "heroes" ON "heroes".id = "map_heroes".hero_id
-    WHERE "maps".id =  $1;`;
+    let queryText = `SELECT * FROM "maps"
+    WHERE "id" =  $1;`;
     pool.query(queryText, [req.params.id])
     .then(result => {
         res.send(result.rows)
@@ -88,6 +86,18 @@ router.put('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
         res.sendStatus(201);
     }).catch(error => {
         res.sendStatus(500);
+    })
+});
+
+router.get('/mapheroes/:id', rejectUnauthenticated, (req, res) => {
+    let queryText = `SELECT "heroes".id, "heroes".name, "heroes".role, "heroes".image FROM "map_heroes"
+    JOIN "heroes" ON "heroes".id = "map_heroes".hero_id
+    WHERE "map_id" = $1;`;
+    pool.query(queryText, [req.params.id])
+    .then(result => {
+        res.send(result.rows)
+    }).catch(error => {
+        res.sendStatus(500)
     })
 })
 

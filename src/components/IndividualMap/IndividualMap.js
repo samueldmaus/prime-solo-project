@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
-import {Card, CardHeader, TextField, Grid, Typography, IconButton, RadioGroup, Radio, FormControlLabel} from '@material-ui/core';
+import {Card, CardHeader, TextField, Grid, Typography, IconButton, RadioGroup, Radio, FormControlLabel, Avatar} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import EditIcon from '@material-ui/icons/Edit';
@@ -31,6 +31,10 @@ const styles = theme => ({
     },
     title: {
         color: '#f99e1a'
+    },
+    avatar: {
+        height: 70,
+        width: 70
     }
 });
 
@@ -38,7 +42,7 @@ class IndividualMap extends Component{
     componentDidMount(){
         let id = this.props.match.params.id;
         this.props.dispatch({type: "GET_IND_MAP", payload: id});
-
+        this.props.dispatch({type: "GET_MAP_HEROES", payload: id});
     }
 
     state = {
@@ -134,6 +138,9 @@ class IndividualMap extends Component{
                                         <div className={classes.info}>
                                             <Typography className={classes.title} variant="h5">DESCRIPTION</Typography>
                                             <p>{map.description}</p>
+                                            {this.props.store.mapHeroes.map(hero => (
+                                                <Avatar key={hero.id} alt={hero.name} src={hero.image} className={classes.avatar}/>
+                                            ))}
                                         </div>
                                     </Grid>
                                 </Grid>

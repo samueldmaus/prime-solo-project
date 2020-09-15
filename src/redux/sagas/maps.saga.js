@@ -45,6 +45,15 @@ function* deleteFavoriteMap(action){
     }catch(error){
         console.log('error in DELET MAP FAVORITE SAGA:', error)
     }
+};
+
+function* fetchMapHeroes(action){
+    try{
+        let response = yield axios.get(`/api/map/mapheroes/${action.payload}`);
+        yield put({type: "SAVE_MAP_HEROES", payload: response.data})
+    }catch(error){
+        console.log('error in MAP HEROES SAGA:', error)
+    }
 }
 
 function* mapSaga(){
@@ -52,7 +61,8 @@ function* mapSaga(){
     yield takeEvery("GET_IND_MAP", fetchIndividualMap);
     yield takeEvery("SAVE_FAV_MAP", saveFavoriteMap);
     yield takeEvery('DELETE_FAV_MAP', deleteFavoriteMap);
-    yield takeEvery('FETCH_MAP_FAVORITES', fetchMapFavorites)
+    yield takeEvery('FETCH_MAP_FAVORITES', fetchMapFavorites);
+    yield takeEvery('GET_MAP_HEROES', fetchMapHeroes)
 }
 
 export default mapSaga;
