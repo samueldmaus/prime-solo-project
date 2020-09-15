@@ -6,7 +6,6 @@ const {rejectUnauthenticated, rejectAdmin} = require('../modules/authentication-
 // route to post new map to db
 router.post('/add', rejectUnauthenticated, rejectAdmin, async (req, res) => {
     let map = req.body;
-    console.log(map)
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
@@ -15,7 +14,6 @@ router.post('/add', rejectUnauthenticated, rejectAdmin, async (req, res) => {
         RETURNING "id";`;
         const newMapResult = await client.query(firstQuery, [map.name, map.type, map.image, map.description]);
         const id = newMapResult.rows[0].id;
-        console.log(id)
         const secondQuery = `INSERT INTO "map_heroes" ("hero_id", "map_id")
         VALUES ($1, $2);`;
         await client.query(secondQuery, [Number(map.hero_one), id]);
@@ -56,8 +54,10 @@ router.get('/:type', rejectUnauthenticated, (req, res) => {
 
 // route to get individual map info
 router.get('/ind/:id', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT * FROM "maps"
-    WHERE "id" = $1;`;
+    let queryText = `SELECT "maps".id, "maps".name, "maps".type, "maps".image, "maps".description, "heroes".id AS "heroId", "heroes".name AS "heroName", "heroes".role AS "heroRole" FROM "maps"
+    JOIN "map_heroes" ON "map_heroes".map_id = "maps".id
+    JOIN "heroes" ON "heroes".id = "map_heroes".hero_id
+    WHERE "maps".id =  $1;`;
     pool.query(queryText, [req.params.id])
     .then(result => {
         res.send(result.rows)

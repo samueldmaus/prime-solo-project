@@ -32,3 +32,9 @@ CREATE TABLE "map_favorites" (
 	"user_id" INT REFERENCES "user",
 	"hero_id" INT REFERENCES "maps"
 );
+
+CREATE TABLE "map_heroes" (
+	"id" SERIAL PRIMARY KEY,
+	"hero_id" INT REFERENCES "heroes",
+	"map_id" INT REFERENCES "maps"
+	);
