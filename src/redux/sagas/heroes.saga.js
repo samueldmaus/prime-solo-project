@@ -47,14 +47,23 @@ function* deleteFavoriteHero(action){
     }catch(error){
         console.log('error in DELETE HERO FAVORITE SAGA:', error)
     }
+};
+
+function* fetchTeamComps(){
+    try{
+        
+    }catch(error){
+        console.log('error in SAVE TEAM COMP SAGA:', error)
+    }
 }
 
 function* heroSaga() {
     yield takeEvery('FETCH_HEROES', fetchHeroes);
     yield takeEvery('GET_IND_HERO', fetchIndividualHero);
     yield takeEvery('SAVE_FAV_HERO', saveFavoriteHero);
-    yield takeEvery('DELETE_FAV_HERO', deleteFavoriteHero)
+    yield takeEvery('DELETE_FAV_HERO', deleteFavoriteHero);
     yield takeEvery('FETCH_HERO_FAVORITES', fetchHeroFavorites);
+    yield takeEvery('FETCH_TEAM_COMPS', fetchTeamComps);
 }
 
 export default heroSaga;

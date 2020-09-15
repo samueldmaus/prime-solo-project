@@ -14,6 +14,7 @@ const heroRouter = require('./routes/hero.router');
 const mapRouter = require('./routes/map.router');
 const favHeroRouter = require('./routes/favHero.router');
 const favMapRouter = require('./routes/favMap.router');
+const teamCompRouter = require('./routes/teamComp.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/api/hero', heroRouter);
 app.use('/api/map', mapRouter);
 app.use('/api/favhero', favHeroRouter);
 app.use('/api/favmap', favMapRouter);
+app.use('/api/teamcomp', teamCompRouter);
 
 // Serve static files
 app.use(express.static('build'));
