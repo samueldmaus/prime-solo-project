@@ -20,10 +20,11 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import Add from '../Add/Add';
-import ListHeroes from '../ListHeroes/ListHeroes'
+import ListHeroes from '../ListHeroes/ListHeroes';
 import IndividualHero from '../IndividualHero/IndividualHero';
 import ListMaps from '../ListMaps/ListMaps';
-import IndividualMap from '../IndividualMap/IndividualMap'
+import IndividualMap from '../IndividualMap/IndividualMap';
+import TeamComposition from '../TeamComposition/TeamComposition';
 
 import './App.css';
 
@@ -115,6 +116,10 @@ class App extends Component {
 
             <ProtectedRoute
               exact path = '/maps/:id' component={IndividualMap}
+            />
+
+            <ProtectedRoute
+              exact path = '/teamcomposition' component={TeamComposition}
             />
 
             {/* If none of the other routes matched, we will show a 404. */}

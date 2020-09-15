@@ -21,11 +21,6 @@ const styles = theme => ({
         borderRadius: '5%',
         align: 'left'
     },
-    info: {
-        alignText: 'right',
-        margin: 10,
-        
-    },
     header: {
         backgroundImage: 'linear-gradient(to left, rgba(255,0,0,0), rgba(250, 156,29))',
     },
@@ -135,13 +130,13 @@ class IndividualMap extends Component{
                                 <Grid container>
                                     <Grid item xs={6}>
                                         <img className={classes.image} src={map.image} alt={map.name} />
-                                        <div className={classes.info}>
-                                            <Typography className={classes.title} variant="h5">DESCRIPTION</Typography>
-                                            <p>{map.description}</p>
-                                            {this.props.store.mapHeroes.map(hero => (
-                                                <Avatar key={hero.id} alt={hero.name} src={hero.image} className={classes.avatar}/>
-                                            ))}
-                                        </div>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                        <Typography className={classes.title} variant="h5">DESCRIPTION</Typography>
+                                        <p>{map.description}</p>
+                                        {this.props.store.mapHeroes.map(hero => (
+                                            <Avatar key={hero.id} alt={hero.name} src={hero.image} className={classes.avatar}/>
+                                        ))}
                                     </Grid>
                                 </Grid>
                                 <IconButton onClick={()=>this.props.history.push('/maps')}><KeyboardBackspaceIcon fontSize="large"></KeyboardBackspaceIcon></IconButton>
