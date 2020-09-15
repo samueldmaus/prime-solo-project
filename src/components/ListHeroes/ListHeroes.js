@@ -42,7 +42,7 @@ class ListHeroes extends Component{
             <>
                 <div className={classes.title}>
                     <h1>Overwatch Heroes</h1>
-                <FormControl onChange={this.handleRoleSearch}>
+                <FormControl>
                     <NativeSelect id="roleSelect" onChange={this.hanleRoleSelectChange}>
                         <option value='All'>All</option>
                         <option value='Tank'>Tank</option>

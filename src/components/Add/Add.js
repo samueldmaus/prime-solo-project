@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
 import ReactCardFlip from 'react-card-flip';
 import {withStyles} from '@material-ui/core/styles'
 import {Grid, Card, CardHeader, CardActionArea, CardMedia, TextField,
-    RadioGroup, Radio, FormControlLabel, IconButton} from '@material-ui/core';
+    RadioGroup, Radio, FormControlLabel, IconButton, NativeSelect, FormControl} from '@material-ui/core';
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import ArrowBackTwoToneIcon from '@material-ui/icons/ArrowBackTwoTone'
 
@@ -27,10 +28,17 @@ const styles = theme => ({
     },
     input: {
         margin: 20,
+    },
+    heroDiv: {
+        margin: 10
     }
 });
 
 class Add extends Component{
+    componentDidMount(){
+        this.props.dispatch({type:"FETCH_HEROES", payload: 'All'})
+    }
+
     state = {
         isHero: true,
         isFlipped: false,
@@ -48,7 +56,10 @@ class Add extends Component{
             name: '',
             type: '',
             image: '',
-            description: ''
+            description: '',
+            hero_one: 0,
+            hero_two: 0,
+            hero_three: 0
         }
     };
 
@@ -94,7 +105,10 @@ class Add extends Component{
                 name: '',
                 type: this.state.newMap.type,
                 image: '',
-                description: ''
+                description: '',
+                hero_one: 0,
+                hero_two: 0,
+                hero_three: 0
             }
         })
     }
@@ -150,6 +164,7 @@ class Add extends Component{
                 </Grid>
                 {this.state.isHero ? (
                     <Card className={classes.cardBack}>
+                        <h2 className={classes.input}>ADD HERO</h2>
                         <form onSubmit={this.addHero} className={classes.input}>
                             <div>
                                 <TextField margin="dense" label="Hero Name" value={this.state.newHero.name} onChange={(event)=>this.handleHeroChange(event, 'name')}/>
@@ -176,6 +191,7 @@ class Add extends Component{
                     </Card>
                 ) : (
                     <Card className={classes.cardBack}>
+                        <h2 className={classes.input}>ADD MAP</h2>
                         <form onSubmit={this.addMap} className={classes.input}>
                             <TextField margin="dense" label="Map Name" value={this.state.newMap.name} onChange={(event)=>this.handleMapChange(event,'name')}/>
                             <RadioGroup row id="mapTypeRadio" onChange={(event)=>this.handleMapChange(event,'type')}>
@@ -187,6 +203,34 @@ class Add extends Component{
                             <TextField margin="dense" label="Map Image" value={this.state.newMap.image} onChange={(event)=>this.handleMapChange(event,'image')}/>
                             <TextField multiline fullWidth rows={4} margin="dense" variant="outlined"
                             label="Map Description" value={this.state.newMap.description} onChange={(event)=>this.handleMapChange(event,'description')}/>
+                            <div className={classes.heroDiv}>
+                                <h4>Map Heroes</h4>
+                                <FormControl className={classes.heroDiv}>
+                                    <NativeSelect onChange={(event)=>this.handleMapChange(event,'hero_one')}>
+                                        <option aria-label='None' value=''/>
+                                        {this.props.store.heroes.map(hero => (
+                                            <option key={hero.id} value={hero.id}>{hero.name}</option>
+                                        ))}
+                                    </NativeSelect>
+                                </FormControl>
+                                <FormControl className={classes.heroDiv}>
+                                    <NativeSelect onChange={(event)=>this.handleMapChange(event,'hero_two')}>
+                                        <option aria-label='None' value=''/>
+                                        {this.props.store.heroes.map(hero => (
+                                            <option key={hero.id} value={hero.id}>{hero.name}</option>
+                                        ))}
+                                    </NativeSelect>
+                                </FormControl>
+                                <FormControl className={classes.heroDiv}>
+                                    <NativeSelect onChange={(event)=>this.handleMapChange(event,'hero_three')}>
+                                        <option aria-label='None' value=''/>
+                                        {this.props.store.heroes.map(hero => (
+                                            <option key={hero.id} value={hero.id}>{hero.name}</option>
+                                        ))}
+                                    </NativeSelect>
+                                </FormControl>
+                            </div>
+                            <br/>
                             <IconButton onClick={this.resetForm}><ArrowBackTwoToneIcon fontSize="large"></ArrowBackTwoToneIcon></IconButton>
                             <IconButton type="submit"><AddSharpIcon fontSize="large"></AddSharpIcon></IconButton>
                         </form>
@@ -199,4 +243,4 @@ class Add extends Component{
     }
 }
 
-export default connect()(withStyles(styles)(Add));
+export default connect(mapStoreToProps)(withStyles(styles)(Add));

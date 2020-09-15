@@ -4,16 +4,31 @@ const router = express.Router();
 const {rejectUnauthenticated, rejectAdmin} = require('../modules/authentication-middleware');
 
 // route to post new map to db
-router.post('/add', rejectUnauthenticated, rejectAdmin, (req, res) => {
+router.post('/add', rejectUnauthenticated, rejectAdmin, async (req, res) => {
     let map = req.body;
-    let queryText = `INSERT INTO "maps" ("name", "type", "image", "description")
-    VALUES ($1, $2, $3, $4);`;
-    pool.query(queryText, [map.name, map.type, map.image, map.description])
-    .then(result => {
-        res.sendStatus(201);
-    }).catch(error => {
-        res.sendStatus(500);
-    })
+    console.log(map)
+    const client = await pool.connect();
+    try {
+        await client.query('BEGIN');
+        const firstQuery = `INSERT INTO "maps" ("name", "type", "image", "description")
+        VALUES ($1, $2, $3, $4)
+        RETURNING "id";`;
+        const newMapResult = await client.query(firstQuery, [map.name, map.type, map.image, map.description]);
+        const id = newMapResult.rows[0].id;
+        console.log(id)
+        const secondQuery = `INSERT INTO "map_heroes" ("hero_id", "map_id")
+        VALUES ($1, $2);`;
+        await client.query(secondQuery, [Number(map.hero_one), id]);
+        await client.query(secondQuery, [Number(map.hero_two), id]);
+        await client.query(secondQuery, [Number(map.hero_three), id]);
+        await client.query('COMMIT');
+        res.sendStatus(201)
+    }catch(error) {
+        await client.query('ROLLBACK');
+        throw error;
+    }finally{
+        client.release()
+    }
 });
 
 // route to get all map information from db

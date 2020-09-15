@@ -48,7 +48,7 @@ class ListMaps extends Component{
             <>
                 <div className={classes.title}>
                     <h1>Overwatch Maps</h1>
-                    <FormControl onChange={this.handleRoleSearch}>
+                    <FormControl>
                         <NativeSelect id="typeSelect" onChange={this.handleTypeSelectChange} >
                             <option value='All'>All</option>
                             <option value='Assault'>Assault</option>
