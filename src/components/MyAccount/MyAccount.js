@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import {withStyles} from '@material-ui/core/styles'
+import {withStyles} from '@material-ui/core/styles';
 import {Accordion, AccordionDetails, AccordionSummary, Avatar, IconButton, Grid} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import InfoIcon from '@material-ui/icons/Info'
@@ -25,7 +25,8 @@ const styles = theme => ({
 class MyAccount extends Component{
   componentDidMount(){
     this.props.dispatch({type: "FETCH_HERO_FAVORITES"});
-    this.props.dispatch({type: "FETCH_MAP_FAVORITES"})
+    this.props.dispatch({type: "FETCH_MAP_FAVORITES"});
+    this.props.dispatch({type: "FETCH_TEAM_COMPS"});
   };
 
   render(){
@@ -64,6 +65,14 @@ class MyAccount extends Component{
             </AccordionDetails>
           </Accordion>
         }
+        {this.props.store.teamComps.map(comp => (
+          <>
+          <h2>{comp.name}</h2>
+            {comp.heroList.map(hero => {
+            return <p>{hero.hero}</p>
+          })}
+          </>
+        ))}
       </>
     )
   }

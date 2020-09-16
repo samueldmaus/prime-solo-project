@@ -51,7 +51,8 @@ function* deleteFavoriteHero(action){
 
 function* fetchTeamComps(){
     try{
-        
+        let response = yield axios.get('/api/teamcomp');
+        yield put({type: 'SAVE_TEAM_COMPS', payload: response.data})
     }catch(error){
         console.log('error in SAVE TEAM COMP SAGA:', error)
     }

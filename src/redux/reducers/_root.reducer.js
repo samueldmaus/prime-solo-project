@@ -8,6 +8,7 @@ import individualMap from './ind_map.reducer';
 import favHeroes from './fav_heroes.reducer'
 import favMaps from './fav_maps.reducer';
 import mapHeroes from './map_heroes.reducer';
+import teamComps from './team_comp.reducer'
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,7 +25,8 @@ const rootReducer = combineReducers({
   individualMap,
   favHeroes,
   favMaps,
-  mapHeroes
+  mapHeroes,
+  teamComps
 });
 
 export default rootReducer;

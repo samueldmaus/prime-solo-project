@@ -1,10 +1,23 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import {withStyles} from '@material-ui/core/styles';
 import {Grid, Card, CardHeader, Avatar, IconButton, TextField, Button} from '@material-ui/core';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined'
 import axios from 'axios';
 
+const styles = theme => ({
+    card: {
+        marginLeft: 15,
+        marginBottom: 5
+    },
+    input: {
+        width: 300
+    },
+    header: {
+        marginLeft: 15
+    }
+})
 class TeamComposition extends Component{
     componentDidMount(){
         this.props.dispatch({type:"FETCH_HEROES", payload: 'All'})
@@ -101,13 +114,16 @@ class TeamComposition extends Component{
     }
 
     render(){
+        const {classes} = this.props;
         return(
             <>
-            <Grid item xs={12}>
-                    <Card>
+            {this.state.createNewComp ? (
+                <>
+                <Grid item xs={12}>
+                    <Card className={classes.card}>
                         <CardHeader title="Team Composition" />
-                        <div>
-                            <TextField variant="outlined" label="Team Composition Name" value={this.state.comp.name} onChange={(event)=>this.handleTeamCompName(event, 'name')}/>
+                        <div className={classes.card}>
+                            <TextField className={classes.input} variant="outlined" label="Team Composition Name" value={this.state.comp.name} onChange={(event)=>this.handleTeamCompName(event, 'name')}/>
                             <h4>{this.state.comp.tank_one}</h4>
                             <h4>{this.state.comp.tank_two}</h4>
                             <h4>{this.state.comp.dps_one}</h4>
@@ -119,14 +135,13 @@ class TeamComposition extends Component{
                         </div>
                     </Card>
                 </Grid>
-            <Grid>
-                <h2>Tank</h2>
-                
+
+                <h2 className={classes.header}>Tank</h2>
                 {this.props.store.heroes.map(hero => {
                     if(hero.role === 'Tank' && hero.name !== this.state.comp.tank_one && hero.name !== this.state.comp.tank_two){
                         return (
                             <Grid item xs={3} key={hero.id}>
-                                <Card>
+                                <Card className={classes.card}>
                                     <p>{hero.name}</p>
                                     <Avatar alt={hero.name} src={hero.image} />
                                     <IconButton onClick={()=>this.checkTankTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
@@ -138,12 +153,13 @@ class TeamComposition extends Component{
                 })}
                 
                 <br/>
-                <h2>DPS</h2>
+
+                <h2 className={classes.header}>DPS</h2>
                 {this.props.store.heroes.map(hero => {
                     if(hero.role === 'DPS' && hero.name !== this.state.comp.dps_one && hero.name !== this.state.comp.dps_two){
                         return (
                             <Grid item xs={3} key={hero.id}>
-                                <Card>
+                                <Card className={classes.card}>
                                     <p>{hero.name}</p>
                                     <Avatar alt={hero.name} src={hero.image} />
                                     <IconButton onClick={()=>this.checkDPSTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
@@ -155,12 +171,12 @@ class TeamComposition extends Component{
                 })}
 
                 <br/>
-                <h2>Support</h2>
+                <h2 className={classes.header}>Support</h2>
                 {this.props.store.heroes.map(hero => {
                     if(hero.role === 'Support' && hero.name !== this.state.comp.support_one && hero.name !== this.state.comp.support_two){
                         return (
                             <Grid item xs={3} key={hero.id}>
-                                <Card>
+                                <Card className={classes.card}>
                                     <p>{hero.name}</p>
                                     <Avatar alt={hero.name} src={hero.image} />
                                     <IconButton onClick={()=>this.checkSupportTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
@@ -169,11 +185,17 @@ class TeamComposition extends Component{
                         )
                     }
                 })}
-                <br/>
-                </Grid>
+
                 </>
+            ) : (
+                <div className={classes.card}>
+                    <h2>Team Composition</h2>
+                    <Button onClick={()=>this.setState({createNewComp: true, ...this.state.comp})}variant="contained" color="primary">Create New Team Composition</Button>
+                </div>
+            )}
+        </>
         )
     }
 }
 
-export default connect(mapStoreToProps)(TeamComposition);
+export default connect(mapStoreToProps)(withStyles(styles)(TeamComposition));
