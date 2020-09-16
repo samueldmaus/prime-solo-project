@@ -30,6 +30,11 @@ const styles = theme => ({
     avatar: {
         height: 70,
         width: 70
+    },
+    heroDiv: {
+        display: 'inline-block',
+        margin: 10
+        
     }
 });
 
@@ -134,8 +139,12 @@ class IndividualMap extends Component{
                                     <Grid item xs={6}>
                                         <Typography className={classes.title} variant="h5">DESCRIPTION</Typography>
                                         <p>{map.description}</p>
+                                        <Typography className={classes.title} variant="h5">MAP HEROES</Typography>
                                         {this.props.store.mapHeroes.map(hero => (
-                                            <Avatar key={hero.id} alt={hero.name} src={hero.image} className={classes.avatar}/>
+                                            <div key={hero.id} className={classes.heroDiv}>
+                                                <p>{hero.name}</p>
+                                                <Avatar alt={hero.name} src={hero.image} className={classes.avatar}/>
+                                            </div>
                                         ))}
                                     </Grid>
                                 </Grid>

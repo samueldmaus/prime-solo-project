@@ -28,9 +28,13 @@ const styles = theme => ({
     },
     input: {
         margin: 20,
+        
     },
     heroDiv: {
         margin: 10
+    },
+    text: {
+        width: 300
     }
 });
 
@@ -167,14 +171,14 @@ class Add extends Component{
                         <h2 className={classes.input}>ADD HERO</h2>
                         <form onSubmit={this.addHero} className={classes.input}>
                             <div>
-                                <TextField margin="dense" label="Hero Name" value={this.state.newHero.name} onChange={(event)=>this.handleHeroChange(event, 'name')}/>
+                                <TextField className={classes.text} margin="dense" label="Hero Name" value={this.state.newHero.name} onChange={(event)=>this.handleHeroChange(event, 'name')}/>
                                 <RadioGroup row id="heroRoleRadio" onChange={(event)=>this.handleHeroChange(event, 'role')}>
                                     <FormControlLabel value="Tank" control={<Radio />} label="Tank" />
                                     <FormControlLabel value="DPS" control={<Radio />} label="DPS" />
                                     <FormControlLabel value="Support" control={<Radio />} label="Support" />
                                 </RadioGroup>
                             </div>
-                            <TextField margin="dense" label="Hero Image" value={this.state.newHero.image} onChange={(event)=>this.handleHeroChange(event, 'image')}/>
+                            <TextField className={classes.text} margin="dense" label="Hero Image" value={this.state.newHero.image} onChange={(event)=>this.handleHeroChange(event, 'image')}/>
                             <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline 
                             label="First Ability" value={this.state.newHero.ability_one} onChange={(event)=>this.handleHeroChange(event, 'ability_one')}/>
                             <TextField margin="dense" variant="outlined" rows={4} fullWidth multiline
@@ -193,14 +197,14 @@ class Add extends Component{
                     <Card className={classes.cardBack}>
                         <h2 className={classes.input}>ADD MAP</h2>
                         <form onSubmit={this.addMap} className={classes.input}>
-                            <TextField margin="dense" label="Map Name" value={this.state.newMap.name} onChange={(event)=>this.handleMapChange(event,'name')}/>
+                            <TextField className={classes.text} margin="dense" label="Map Name" value={this.state.newMap.name} onChange={(event)=>this.handleMapChange(event,'name')}/>
                             <RadioGroup row id="mapTypeRadio" onChange={(event)=>this.handleMapChange(event,'type')}>
                                 <FormControlLabel value="Assault" control={<Radio/>} label="Assault"/>
                                 <FormControlLabel value="Escort" control={<Radio/>} label="Escort"/>
                                 <FormControlLabel value="Control" control={<Radio/>} label="Control"/>
                                 <FormControlLabel value="Hyrid" control={<Radio/>} label="Hybrid"/>
                             </RadioGroup>
-                            <TextField margin="dense" label="Map Image" value={this.state.newMap.image} onChange={(event)=>this.handleMapChange(event,'image')}/>
+                            <TextField className={classes.text} margin="dense" label="Map Image" value={this.state.newMap.image} onChange={(event)=>this.handleMapChange(event,'image')}/>
                             <TextField multiline fullWidth rows={4} margin="dense" variant="outlined"
                             label="Map Description" value={this.state.newMap.description} onChange={(event)=>this.handleMapChange(event,'description')}/>
                             <div className={classes.heroDiv}>

@@ -16,8 +16,8 @@ const styles = theme => ({
     height: 75
   },
   infoDiv: {
-    display: 'flex',
-    margin: 30
+    display: 'inline-block',
+    margin: 30,
   },
   name: {
     margin: 15
