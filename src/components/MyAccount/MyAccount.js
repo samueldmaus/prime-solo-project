@@ -11,7 +11,9 @@ const styles = theme => ({
     margin: 15
   },
   pic: {
-    margin: 15
+    margin: 15,
+    width: 75,
+    height: 75
   },
   infoDiv: {
     display: 'flex',
@@ -65,14 +67,28 @@ class MyAccount extends Component{
             </AccordionDetails>
           </Accordion>
         }
-        {this.props.store.teamComps.map(comp => (
-          <>
-          <h2>{comp.name}</h2>
-            {comp.heroList.map(hero => {
-            return <p>{hero.hero}</p>
-          })}
-          </>
-        ))}
+        {this.props.store.teamComps && 
+          <Accordion className={classes.card}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><h3>TEAM COMPOSITIONS</h3></AccordionSummary>
+            <AccordionDetails className={classes.card}>
+              <Grid container>
+              {this.props.store.teamComps.map(comp => (
+                <Grid item xs={12} className={classes.infoDiv} key={comp.id}>
+                  <h4>{comp.name}</h4>
+                  
+                  {comp.heroList.map(hero => (
+                    <div key={hero.heroId}>
+                      <p>{hero.hero} - {hero.role}</p>
+                      <Avatar alt={hero.hero} src={hero.image} />
+                    </div>
+                  ))}
+                </Grid>
+              ))}
+              </Grid>
+            </AccordionDetails>
+          </Accordion>
+
+        }
       </>
     )
   }
