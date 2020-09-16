@@ -21,6 +21,10 @@ const styles = theme => ({
   },
   name: {
     margin: 15
+  },
+  heroDiv: {
+    margin: 5,
+    display: 'flex'
   }
 
 })
@@ -37,7 +41,7 @@ class MyAccount extends Component{
       <>
         {this.props.store.heroes && 
           <Accordion className={classes.card} >
-            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/2ZyfEbz" /><h3>FAVORITE HEROES</h3></AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/2ZIVxaG" /><h3>FAVORITE HEROES</h3></AccordionSummary>
             <AccordionDetails className={classes.card}>
               <Grid>
                 {this.props.store.favHeroes.map(hero => (
@@ -53,7 +57,7 @@ class MyAccount extends Component{
         }
         {this.props.store.maps &&
           <Accordion className={classes.card} >
-            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/32rZnqz" /><h3>FAVORITE MAPS</h3></AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Maps" src="https://bit.ly/32rZnqz" /><h3>FAVORITE MAPS</h3></AccordionSummary>
             <AccordionDetails className={classes.card}>
               <Grid>
                 {this.props.store.favMaps.map(map => (
@@ -69,21 +73,24 @@ class MyAccount extends Component{
         }
         {this.props.store.teamComps && 
           <Accordion className={classes.card}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}><h3>TEAM COMPOSITIONS</h3></AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}><Avatar className={classes.pic} alt="Overwatch Team" src="https://bit.ly/2RwPfXl"/><h3>TEAM COMPOSITIONS</h3></AccordionSummary>
             <AccordionDetails className={classes.card}>
               <Grid container>
-              {this.props.store.teamComps.map(comp => (
-                <Grid item xs={12} className={classes.infoDiv} key={comp.id}>
-                  <h4>{comp.name}</h4>
-                  
-                  {comp.heroList.map(hero => (
-                    <div key={hero.heroId}>
-                      <p>{hero.hero} - {hero.role}</p>
-                      <Avatar alt={hero.hero} src={hero.image} />
-                    </div>
-                  ))}
-                </Grid>
-              ))}
+                {this.props.store.teamComps.map(comp => (
+                  <>
+                  <Grid item xs={12} className={classes.heroDiv} key={comp.id}>
+                    <h4>{comp.name}</h4>
+                  </Grid>
+                  <Grid item xs={12} className={classes.heroDiv} >
+                    {comp.heroList.map(hero => (
+                      <div key={hero.heroId} className={classes.heroDiv}>
+                        <p className={classes.heroDiv}>{hero.hero} - {hero.role}</p>
+                        <Avatar alt={hero.hero} src={hero.image} />
+                      </div>
+                    ))}
+                  </Grid>
+                  </>
+                ))}
               </Grid>
             </AccordionDetails>
           </Accordion>

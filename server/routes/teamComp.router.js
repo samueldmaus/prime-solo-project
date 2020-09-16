@@ -18,7 +18,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 //get user's saved team compositions
 router.get('/', rejectUnauthenticated, (req, res) => {
-    let queryText = `SELECT "team_compositions".id, "team_compositions".name, json_agg(json_build_object('heroId', "heroes".id, 'hero', "heroes".name, 'role', "heroes".role, 'image', "heroes".image)) AS "heroList"
+    let queryText = `SELECT "team_compositions".id, "team_compositions".name, json_agg(json_build_object('heroId', "heroes".id, 'hero', "heroes".name, 
+    'role', "heroes".role, 'image', "heroes".image) ORDER BY "heroes".role DESC) AS "heroList"
     FROM "team_compositions"
     JOIN "heroes" ON "heroes".id = "team_compositions".tank_one OR "heroes".id = "team_compositions".tank_two OR "heroes".id = "team_compositions".dps_one 
     OR "heroes".id = "team_compositions".dps_two OR "heroes".id = "team_compositions".support_one OR "heroes".id = "team_compositions".support_two
