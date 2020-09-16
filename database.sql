@@ -37,4 +37,17 @@ CREATE TABLE "map_heroes" (
 	"id" SERIAL PRIMARY KEY,
 	"hero_id" INT REFERENCES "heroes",
 	"map_id" INT REFERENCES "maps"
-	);
+);
+
+CREATE TABLE "team_compositions" (
+	"id" SERIAL PRIMARY KEY,
+	"user_id" INT REFERENCES "user",
+	"name" VARCHAR (80),
+	"tank_one" INT REFERENCES "heroes",
+	"tank_two" INT REFERENCES "heroes",
+	"dps_one" INT REFERENCES "heroes",
+	"dps_two" INT REFERENCES "heroes",
+	"support_one" INT REFERENCES "heroes",
+	"support_two" INT REFERENCES "heroes"
+);
+	
