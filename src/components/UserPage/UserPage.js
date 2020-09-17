@@ -28,8 +28,8 @@ class UserPage extends Component {
           <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
           <p>Your ID is: {this.props.store.user.id}</p>
         </div>
-        <Grid>
-          <Grid item xs={12}>
+        <Grid container>
+          <Grid item xs={4}>
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/heroes')}>
                 <CardHeader className={classes.header} title="HEROES" />
@@ -38,7 +38,7 @@ class UserPage extends Component {
             </Card>
           </Grid>
           
-          <Grid item xs={12}>
+          <Grid item xs={4}>
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/maps')}>
                 <CardHeader className={classes.header} title="MAPS" />
@@ -47,7 +47,7 @@ class UserPage extends Component {
             </Card>
           </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={4}>
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/teamcomposition')}>
                 <CardHeader className={classes.header} title="Team Compositions" />

@@ -41,7 +41,7 @@ class MyAccount extends Component{
       <>
         {this.props.store.heroes && 
           <Accordion className={classes.card} >
-            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/2ZIVxaG" /><h3>FAVORITE HEROES</h3></AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/3hIEFad" /><h3>FAVORITE HEROES</h3></AccordionSummary>
             <AccordionDetails className={classes.card}>
               <Grid>
                 {this.props.store.favHeroes.map(hero => (
