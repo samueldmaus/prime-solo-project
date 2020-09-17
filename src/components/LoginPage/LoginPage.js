@@ -19,6 +19,9 @@ class LoginPage extends Component {
           >
             Register
           </button>
+          <br />
+          <br />
+          <button>LOG IN WITH BATTLE.NET</button>
         </center>
       </div>
     );

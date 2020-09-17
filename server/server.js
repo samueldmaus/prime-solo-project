@@ -1,6 +1,7 @@
 
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -14,7 +15,8 @@ const heroRouter = require('./routes/hero.router');
 const mapRouter = require('./routes/map.router');
 const favHeroRouter = require('./routes/favHero.router');
 const favMapRouter = require('./routes/favMap.router');
-const teamCompRouter = require('./routes/teamComp.router')
+const teamCompRouter = require('./routes/teamComp.router');
+const bnetRouter = require('./routes/bnet_user.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -26,6 +28,9 @@ app.use(sessionMiddleware);
 // start up passport sessions
 app.use(passport.initialize());
 app.use(passport.session());
+
+// use the bnet strategy with cors
+app.use(cors(bnetRouter))
 
 /* Routes */
 app.use('/api/user', userRouter);
