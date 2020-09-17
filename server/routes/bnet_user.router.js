@@ -8,13 +8,14 @@ const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/auth/bnet', passport.authenticate('bnet'));
+router.get('/', bnetStrategy.authenticate('bnet'));
 
-router.get('http://localhost:3000/#',
-  passport.authenticate('bnet', { failureRedirect: '/'}),
+router.get('/auth/bnet/callback',
+  bnetStrategy.authenticate('bnet', { failureRedirect: '/'}),
   function(req, res){
-      res.redirect('/')
+      res.redirect('/users')
   }
 );
+
 
 module.exports = router;

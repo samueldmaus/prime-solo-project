@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import LoginForm from '../LoginForm/LoginForm';
+import axios from 'axios'
 
 class LoginPage extends Component {
+
+  bnetAuth = () => {
+    axios.get('/oauth/authorize')
+  }
   render() {
     return (
       <div>
@@ -21,7 +26,7 @@ class LoginPage extends Component {
           </button>
           <br />
           <br />
-          <button>LOG IN WITH BATTLE.NET</button>
+          <button onClick={this.bnetAuth}>LOG IN WITH BATTLE.NET</button>
         </center>
       </div>
     );

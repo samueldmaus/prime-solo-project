@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   infoDiv: {
     display: 'inline-block',
-    margin: 30,
+    margin: 20,
   },
   name: {
     margin: 15
