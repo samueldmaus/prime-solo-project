@@ -43,5 +43,8 @@
   margin-top: 5px;
   margin-left: 10px;
   margin-right: 5px;
-  margin-bottom: 5px
+  margin-bottom: 5px;
+  filter:
+      ‘invert(0%) sepia(30%) saturate(60%) hue-rotate(100deg) brightness(100%) contrast(118%)’,
+
 }

@@ -7,13 +7,20 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const router = express.Router();
+const cors = require('cors');
+
+router.all(cors())
 
 router.get('/', bnetStrategy.authenticate('bnet'));
 
-router.get('/auth/bnet/callback',
+// router.get('/', (req, res) => {
+//   console.log('loggin in with bnet')
+// });
+
+router.get('/callback',
   bnetStrategy.authenticate('bnet', { failureRedirect: '/'}),
   function(req, res){
-      res.redirect('/users')
+      res.redirect('/user')
   }
 );
 

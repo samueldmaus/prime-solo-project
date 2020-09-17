@@ -123,7 +123,7 @@ class TeamComposition extends Component{
                     <Card className={classes.card}>
                         <CardHeader title="Team Composition" />
                         <div className={classes.card}>
-                            <TextField className={classes.input} variant="outlined" label="Team Composition Name" value={this.state.comp.name} onChange={(event)=>this.handleTeamCompName(event, 'name')}/>
+                            <TextField className={classes.input} variant="outlined" label="Team Name" value={this.state.comp.name} onChange={(event)=>this.handleTeamCompName(event, 'name')}/>
                             <h4>{this.state.comp.tank_one}</h4>
                             <h4>{this.state.comp.tank_two}</h4>
                             <h4>{this.state.comp.dps_one}</h4>
@@ -131,7 +131,7 @@ class TeamComposition extends Component{
                             <h4>{this.state.comp.support_one}</h4>
                             <h4>{this.state.comp.support_two}</h4>
                             <br/>
-                            <Button variant="contained" color="primary" onClick={this.addTeamComposition}>Create Team Composition</Button>
+                            <Button variant="contained" color="primary" onClick={this.addTeamComposition}>Save</Button>
                         </div>
                     </Card>
                 </Grid>
@@ -190,7 +190,7 @@ class TeamComposition extends Component{
             ) : (
                 <div className={classes.card}>
                     <h2>Team Composition</h2>
-                    <Button onClick={()=>this.setState({createNewComp: true, ...this.state.comp})}variant="contained" color="primary">Create New Team Composition</Button>
+                    <Button onClick={()=>this.setState({createNewComp: true, ...this.state.comp})}variant="contained" color="primary">Create New Team</Button>
                 </div>
             )}
         </>

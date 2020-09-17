@@ -50,7 +50,7 @@ class UserPage extends Component {
         <Grid item xs={12}>
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/teamcomposition')}>
-                <CardHeader className={classes.header} title="Team Compositions" />
+                <CardHeader className={classes.header} title="MY TEAMS" />
                 
               </CardActionArea>
             </Card>

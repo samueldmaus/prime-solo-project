@@ -7,8 +7,9 @@ import axios from 'axios'
 class LoginPage extends Component {
 
   bnetAuth = () => {
-    axios.get('/oauth/authorize')
+    axios.get('/auth/bnet')
   }
+
   render() {
     return (
       <div>

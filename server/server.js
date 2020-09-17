@@ -1,13 +1,12 @@
 
 const express = require('express');
 require('dotenv').config();
-const cors = require('cors');
 const app = express();
 const bodyParser = require('body-parser');
 const sessionMiddleware = require('./modules/session-middleware');
-
+const cors = require('cors');
 const passport = require('./strategies/user.strategy');
-
+const bnet_passport = require('./strategies/bnet.strategy')
 // Route includes
 const userRouter = require('./routes/user.router');
 const heroRouter = require('./routes/hero.router');
@@ -29,7 +28,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // use the bnet strategy with cors
-app.use(cors('/oauth/authorize', bnetRouter));
+app.use(bnet_passport.initialize());
+app.use(bnet_passport.session())
+app.use('/auth/bnet', bnetRouter);
 
 /* Routes */
 app.use('/api/user', userRouter);

@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
 import ReactCardFlip from 'react-card-flip';
-import {withStyles} from '@material-ui/core/styles'
 import {Grid, Card, CardHeader, CardActionArea, CardMedia, TextField,
-    RadioGroup, Radio, FormControlLabel, IconButton, NativeSelect, FormControl} from '@material-ui/core';
+    RadioGroup, Radio, FormControlLabel, IconButton, NativeSelect, FormControl, withStyles} from '@material-ui/core';
 import AddSharpIcon from '@material-ui/icons/AddSharp';
 import ArrowBackTwoToneIcon from '@material-ui/icons/ArrowBackTwoTone'
 

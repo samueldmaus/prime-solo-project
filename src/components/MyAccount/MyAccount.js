@@ -4,7 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles';
 import {Accordion, AccordionDetails, AccordionSummary, Avatar, IconButton, Grid} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoIcon from '@material-ui/icons/Info'
+import InfoIcon from '@material-ui/icons/Info';
 
 const styles = theme => ({
   card: {
@@ -28,6 +28,7 @@ const styles = theme => ({
   }
 
 })
+
 class MyAccount extends Component{
   componentDidMount(){
     this.props.dispatch({type: "FETCH_HERO_FAVORITES"});
