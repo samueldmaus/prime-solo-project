@@ -28,7 +28,7 @@ class UserPage extends Component {
       <>
         <div>
           <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
-          <p>Your ID is: {this.props.store.user.id}</p>
+
         </div>
         <Grid container>
           <Grid item xs={4}>
@@ -52,8 +52,8 @@ class UserPage extends Component {
         <Grid item xs={4}>
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/teamcomposition')}>
-                <CardHeader className={classes.header} title="Team Compositions" />
-                
+                <CardHeader className={classes.header} title="TEAMS" />
+                <Avatar className={classes.media} src="https://bit.ly/2ZMBKas" alt="Overwatch Team" />
               </CardActionArea>
             </Card>
           </Grid>
