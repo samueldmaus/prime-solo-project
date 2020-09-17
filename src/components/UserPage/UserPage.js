@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles'
-import {Grid, Card, CardActionArea, CardHeader} from '@material-ui/core';
+import {Grid, Card, CardActionArea, CardHeader, Avatar} from '@material-ui/core';
 
 const styles = theme => ({
   card: {
@@ -10,8 +10,10 @@ const styles = theme => ({
     alignItems: 'center'
   },
   media: {
-    height: 400,
+    height:450,
+    width: 600,
     margin: 10,
+    borderRadius: '5%'
   },
   header: {
     backgroundImage: 'linear-gradient(to left, rgba(255,0,0,0), rgba(250, 156,29))',
@@ -33,7 +35,7 @@ class UserPage extends Component {
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/heroes')}>
                 <CardHeader className={classes.header} title="HEROES" />
-                <img className={classes.media} src="https://bit.ly/3bDvFSa" alt="Overwatch Heroes"/>
+                <Avatar className={classes.media} src="https://bit.ly/3bDvFSa" alt="Overwatch Heroes"/>
               </CardActionArea>
             </Card>
           </Grid>
@@ -42,7 +44,7 @@ class UserPage extends Component {
             <Card className={classes.card}>
               <CardActionArea onClick={()=>this.props.history.push('/maps')}>
                 <CardHeader className={classes.header} title="MAPS" />
-                <img className={classes.media} src="https://bit.ly/2FBMQaN" alt="Overwatch Maps" />
+                <Avatar className={classes.media} src="https://bit.ly/2FBMQaN" alt="Overwatch Maps" />
               </CardActionArea>
             </Card>
           </Grid>
