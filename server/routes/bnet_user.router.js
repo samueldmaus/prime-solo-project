@@ -9,7 +9,6 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const cors = require('cors');
 
-router.all(cors())
 
 router.get('/', bnetStrategy.authenticate('bnet'));
 

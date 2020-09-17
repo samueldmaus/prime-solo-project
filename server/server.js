@@ -16,6 +16,7 @@ const favMapRouter = require('./routes/favMap.router');
 const teamCompRouter = require('./routes/teamComp.router');
 const bnetRouter = require('./routes/bnet_user.router');
 
+app.all(cors());
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

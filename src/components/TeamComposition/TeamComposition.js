@@ -9,13 +9,25 @@ import axios from 'axios';
 const styles = theme => ({
     card: {
         marginLeft: 15,
-        marginBottom: 5
+        marginBottom: 5,
+        marginRight: 15
     },
     input: {
         width: 300
     },
     header: {
         marginLeft: 15
+    },
+    heroDiv: {
+        display: 'flex',
+        margin: 10,
+    },
+    name: {
+        marginRight: 40
+    },
+    addBttn: {
+        marginRight: 15,
+        flex: 'right'
     }
 })
 class TeamComposition extends Component{
@@ -118,7 +130,7 @@ class TeamComposition extends Component{
         return(
             <>
             {this.state.createNewComp ? (
-                <>
+                <div>
                 <Grid item xs={12}>
                     <Card className={classes.card}>
                         <CardHeader title="Team Composition" />
@@ -142,9 +154,11 @@ class TeamComposition extends Component{
                         return (
                             <Grid item xs={3} key={hero.id}>
                                 <Card className={classes.card}>
-                                    <p>{hero.name}</p>
-                                    <Avatar alt={hero.name} src={hero.image} />
-                                    <IconButton onClick={()=>this.checkTankTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                    <div className={classes.heroDiv}>
+                                        <p className={classes.name}>{hero.name}</p>
+                                        <Avatar alt={hero.name} src={hero.image} />
+                                        <IconButton className={classes.addBttn} onClick={()=>this.checkTankTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                    </div>
                                 </Card>
                             </Grid>
                            
@@ -160,9 +174,11 @@ class TeamComposition extends Component{
                         return (
                             <Grid item xs={3} key={hero.id}>
                                 <Card className={classes.card}>
-                                    <p>{hero.name}</p>
-                                    <Avatar alt={hero.name} src={hero.image} />
-                                    <IconButton onClick={()=>this.checkDPSTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                    <div className={classes.heroDiv}>
+                                        <p className={classes.name}>{hero.name}</p>
+                                        <Avatar alt={hero.name} src={hero.image} />
+                                        <IconButton onClick={()=>this.checkDPSTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                    </div>                                
                                 </Card>
                             </Grid>
                            
@@ -177,16 +193,18 @@ class TeamComposition extends Component{
                         return (
                             <Grid item xs={3} key={hero.id}>
                                 <Card className={classes.card}>
-                                    <p>{hero.name}</p>
-                                    <Avatar alt={hero.name} src={hero.image} />
-                                    <IconButton onClick={()=>this.checkSupportTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                    <div className={classes.heroDiv}>
+                                        <p className={classes.name}>{hero.name}</p>
+                                        <Avatar alt={hero.name} src={hero.image} />
+                                        <IconButton onClick={()=>this.checkSupportTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                    </div>
                                 </Card>
                             </Grid>
                         )
                     }
                 })}
 
-                </>
+                </div>
             ) : (
                 <div className={classes.card}>
                     <h2>Team Composition</h2>

@@ -8,7 +8,8 @@ import InfoIcon from '@material-ui/icons/Info'
 const styles = theme => ({
     card: {
         margin: 8,
-        textAlign: 'center'
+        textAlign: 'center',
+        
     },
     img: {
         height: 100,
@@ -18,6 +19,9 @@ const styles = theme => ({
     title: {
         margin: 5
     },
+    heroDiv: {
+        display: 'inline-block'
+    }
 })
 
 class ListHeroes extends Component{
@@ -58,8 +62,15 @@ class ListHeroes extends Component{
                         <Grid item xs={3} key={hero.id}>
                             <Card className={classes.card}>
                                 <CardHeader title={hero.name} subheader={hero.role} />
+<<<<<<< HEAD
                                 <Avatar className={classes.img} src={hero.image} alt={hero.name} />
                                 <IconButton onClick={()=>this.viewHero(hero)}><InfoIcon fontSize="large"></InfoIcon></IconButton>
+=======
+                                    <div className={classes.heroDiv}>
+                                        <Avatar className={classes.img} src={hero.image} alt={hero.name} />
+                                        <IconButton onClick={()=>this.viewHero(hero)}><InfoIcon></InfoIcon></IconButton>
+                                    </div>
+>>>>>>> 6b772eab971e256f92245331772c4d0f7c5a21e1
                             </Card>
                         </Grid>   
                     ))}

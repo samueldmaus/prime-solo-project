@@ -134,7 +134,7 @@ class IndividualMap extends Component{
                                 <CardHeader className={classes.header} title={map.name} subheader={map.type} />
                                 <Grid container>
                                     <Grid item xs={6}>
-                                        <img className={classes.image} src={map.image} alt={map.name} />
+                                        <Avatar className={classes.image} src={map.image} alt={map.name} />
                                     </Grid>
                                     <Grid item xs={6}>
                                         <Typography className={classes.title} variant="h5">DESCRIPTION</Typography>

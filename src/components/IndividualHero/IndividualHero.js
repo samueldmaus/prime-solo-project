@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles';
-import {Card, CardHeader, Grid, IconButton, Typography, TextField, RadioGroup, FormControlLabel, Radio} from '@material-ui/core';
+import {Card, CardHeader, Grid, IconButton, Typography, TextField, RadioGroup, FormControlLabel, Radio, Avatar} from '@material-ui/core';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import EditIcon from '@material-ui/icons/Edit';
 import SaveIcon from '@material-ui/icons/Save';
@@ -18,7 +18,8 @@ const styles = theme => ({
         margin: 10,
         float: 'left',
         height: 400,
-        width: 400
+        width: 400,
+        borderRadius: '5%'
     },
     info: {
         align: 'right',
@@ -139,7 +140,7 @@ class IndividualHero extends Component{
                             <CardHeader className={classes.header} title={hero.name} subheader={hero.role}/>
                             <Grid container>
                                 <Grid item xs={12}>
-                                    <img className={classes.image} src={hero.image} alt={hero.name}/>
+                                    <Avatar className={classes.image} src={hero.image} alt={hero.name}/>
                                     <div className={classes.info}>
                                         <Typography className={classes.title} variant="h5">ABILITIES:</Typography>
                                             <h4>{hero.ability_one}</h4>
