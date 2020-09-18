@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles'
 import {Grid, Card, CardActionArea, CardHeader} from '@material-ui/core';
+import axios from 'axios'
 
 const styles = theme => ({
   card: {
@@ -18,7 +19,13 @@ const styles = theme => ({
   }
 })
 
+
 class UserPage extends Component {
+
+  bnetAuth = () => {
+    axios.get('/auth/bnet')
+  }
+
   render() {
     const {classes} = this.props;
 
@@ -26,6 +33,9 @@ class UserPage extends Component {
       <>
         <div>
           <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+
+          <button onClick={this.bnetAuth}>LOG IN WITH BATTLE.NET</button>
+
           <p>Your ID is: {this.props.store.user.id}</p>
         </div>
         <Grid>
