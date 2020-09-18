@@ -64,7 +64,7 @@ class ListHeroes extends Component{
                                 <CardHeader title={hero.name} subheader={hero.role} />
                                     <div className={classes.heroDiv}>
                                         <Avatar className={classes.img} src={hero.image} alt={hero.name} />
-                                        <IconButton onClick={()=>this.viewHero(hero)}><InfoIcon></InfoIcon></IconButton>
+                                        <IconButton onClick={()=>this.viewHero(hero)}><InfoIcon fontSize="medium"></InfoIcon></IconButton>
                                     </div>
                             </Card>
                         </Grid>   

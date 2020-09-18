@@ -26,8 +26,8 @@ const styles = theme => ({
         marginRight: 40
     },
     addBttn: {
-        marginRight: 15,
-        flex: 'right'
+        
+        marginLeft: 70
     }
 })
 class TeamComposition extends Component{
@@ -147,17 +147,20 @@ class TeamComposition extends Component{
                         </div>
                     </Card>
                 </Grid>
-
+                
                 <h2 className={classes.header}>Tank</h2>
+                <Grid container>
                 {this.props.store.heroes.map(hero => {
                     if(hero.role === 'Tank' && hero.name !== this.state.comp.tank_one && hero.name !== this.state.comp.tank_two){
                         return (
-                            <Grid item xs={3} key={hero.id}>
+                            <Grid item xs={2} key={hero.id}>
                                 <Card className={classes.card}>
                                     <div className={classes.heroDiv}>
                                         <p className={classes.name}>{hero.name}</p>
                                         <Avatar alt={hero.name} src={hero.image} />
-                                        <IconButton className={classes.addBttn} onClick={()=>this.checkTankTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                        <div className={classes.addBttn}>
+                                            <IconButton onClick={()=>this.checkTankTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                        </div>
                                     </div>
                                 </Card>
                             </Grid>
@@ -165,19 +168,22 @@ class TeamComposition extends Component{
                         )
                     }
                 })}
-                
+                </Grid>
                 <br/>
 
                 <h2 className={classes.header}>DPS</h2>
+                <Grid container>
                 {this.props.store.heroes.map(hero => {
                     if(hero.role === 'DPS' && hero.name !== this.state.comp.dps_one && hero.name !== this.state.comp.dps_two){
                         return (
-                            <Grid item xs={3} key={hero.id}>
+                            <Grid item xs={2} key={hero.id}>
                                 <Card className={classes.card}>
                                     <div className={classes.heroDiv}>
                                         <p className={classes.name}>{hero.name}</p>
                                         <Avatar alt={hero.name} src={hero.image} />
+                                        <div className={classes.addBttn}>
                                         <IconButton onClick={()=>this.checkDPSTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                        </div>
                                     </div>                                
                                 </Card>
                             </Grid>
@@ -185,25 +191,28 @@ class TeamComposition extends Component{
                         )
                     }
                 })}
-
+                </Grid>
                 <br/>
                 <h2 className={classes.header}>Support</h2>
+                <Grid container>
                 {this.props.store.heroes.map(hero => {
                     if(hero.role === 'Support' && hero.name !== this.state.comp.support_one && hero.name !== this.state.comp.support_two){
                         return (
-                            <Grid item xs={3} key={hero.id}>
+                            <Grid item xs={2} key={hero.id}>
                                 <Card className={classes.card}>
                                     <div className={classes.heroDiv}>
                                         <p className={classes.name}>{hero.name}</p>
                                         <Avatar alt={hero.name} src={hero.image} />
+                                        <div className={classes.addBttn}>
                                         <IconButton onClick={()=>this.checkSupportTeamComp(hero)}><AddCircleOutlineOutlinedIcon></AddCircleOutlineOutlinedIcon></IconButton>
+                                        </div>
                                     </div>
                                 </Card>
                             </Grid>
                         )
                     }
                 })}
-
+                </Grid>
                 </div>
             ) : (
                 <div className={classes.card}>

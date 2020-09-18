@@ -17,8 +17,8 @@ const styles = theme => ({
     image: {
         margin: 10,
         float: 'left',
-        height: 400,
-        width: 400,
+        height: 550,
+        width: 550,
         borderRadius: '5%'
     },
     info: {
