@@ -8,7 +8,7 @@ const styles = theme => ({
   media: {
     width: 700,
     height: 500,
-    borderRadius: '0%'
+    borderRadius: '0%',
   },
   rightGrid: {
     marginTop: 100

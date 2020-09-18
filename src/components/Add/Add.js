@@ -143,6 +143,22 @@ class Add extends Component{
         })
     };
 
+    makeEcho = () => {
+        this.setState({
+            ...this.state,
+            newHero: {
+                name: 'Echo',
+                role: 'DPS',
+                image: 'https://bit.ly/2RFdYss',
+                ability_one: 'TRI-SHOT - Echo fires 3 shots at once, in a triangle pattern',
+                ability_two: 'STICKY BOMBS - Echo fires a volley of sticky bombs that detonates after a delay',
+                ability_three: 'FLIGHT - Echo surges forward quickly, then can fly freely.',
+                ability_four: 'FOCUSING BEAM - Echo channels a beam for a few seconds, dealing very high damage to targets with less than half health.',
+                ability_ult: 'DUPLICATE - Echo duplicates a targeted enemy hero and gains use of their abilities.'
+            },
+            ...this.state.newMap
+        })
+    }
     render(){
         const {classes} = this.props;
         return(
@@ -168,7 +184,7 @@ class Add extends Component{
                 </Grid>
                 {this.state.isHero ? (
                     <Card className={classes.cardBack}>
-                        <h2 className={classes.input}>ADD HERO</h2>
+                        <h2 className={classes.input} onClick={this.makeEcho}>ADD HERO</h2>
                         <form onSubmit={this.addHero} className={classes.input}>
                             <div>
                                 <TextField className={classes.text} margin="dense" label="Hero Name" value={this.state.newHero.name} onChange={(event)=>this.handleHeroChange(event, 'name')}/>
