@@ -64,6 +64,20 @@ router.get('/ind/:id', rejectUnauthenticated, (req, res) => {
     })
 });
 
+// route to get maps by searching for them in input
+router.get('/search/:name', rejectUnauthenticated, (req, res) => {
+    let search = `%${req.params.name}%`;
+    let queryText = `SELECT * FROM "maps"
+    WHERE "name" ILIKE $1
+    ORDER BY "name" ASC;`;
+    pool.query(queryText, [search])
+    .then(result => {
+        res.send(result.rows)
+    }).catch(error => {
+        res.sendStatus(500)
+    })
+})
+
 // route to delete map from db
 router.delete('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
     let queryText = `DELETE FROM "maps"

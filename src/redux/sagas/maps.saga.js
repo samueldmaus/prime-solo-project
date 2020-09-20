@@ -54,6 +54,15 @@ function* fetchMapHeroes(action){
     }catch(error){
         console.log('error in MAP HEROES SAGA:', error)
     }
+};
+
+function* fetchMapBySearchName(action){
+    try{
+        let response = yield axios.get(`/api/map/search/${action.payload}`);
+        yield put({type: "SAVE_MAPS", payload: response.data});
+    }catch(error){
+        console.log('error in MAP SEARCH NAME SAGA:', error)
+    }
 }
 
 function* mapSaga(){
@@ -62,7 +71,8 @@ function* mapSaga(){
     yield takeEvery("SAVE_FAV_MAP", saveFavoriteMap);
     yield takeEvery('DELETE_FAV_MAP', deleteFavoriteMap);
     yield takeEvery('FETCH_MAP_FAVORITES', fetchMapFavorites);
-    yield takeEvery('GET_MAP_HEROES', fetchMapHeroes)
+    yield takeEvery('GET_MAP_HEROES', fetchMapHeroes);
+    yield takeEvery('FETCH_MAPS_NAME', fetchMapBySearchName)
 }
 
 export default mapSaga;
