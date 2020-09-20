@@ -1,9 +1,10 @@
 const passport = require('passport');
 require('dotenv').config();
-let BnetStrategy = require('passport-bnet').Strategy;
-let BNET_ID = process.env.BNET_ID;
-let BNET_SECRET = process.env.BNET_SECRET;
-let util = require('util');
+const BnetStrategy = require('passport-bnet').Strategy;
+const BATTLENET_ID = process.env.BNET_ID;
+const BATTLENET_SECRET = process.env.BNET_SECRET;
+const util = require('util');
+const pool = require('../modules/pool');
 const OAuth2Strategy = require('passport-oauth2')
 const InternalOAuthError = require('passport-oauth2').InternalOAuthError
 
@@ -17,17 +18,17 @@ passport.deserializeUser((user, done) => {
     done(null, obj)
 })
 
-passport.use(new BnetStrategy({
-    clientID: BNET_ID,
-    clientSecret: BNET_SECRET,
-    callbackURL: "/user",
+module.exports= (passport.use(new BnetStrategy({
+    clientID: BATTLENET_ID ,
+    clientSecret: BATTLENET_SECRET,
+    callbackURL: "https://localhost:3000/auth/bnet/callback",
     region: "us"
 }, function(accessToken, refreshToken, profile, done) {
     
         console.log(JSON.stringify(profile))
         return done(null, profile)
     })
-);
+));
 
 // function getHost(region) {
 //     console.log("REGION")
@@ -80,5 +81,3 @@ passport.use(new BnetStrategy({
 // }
 
 
-
-module.exports = passport;

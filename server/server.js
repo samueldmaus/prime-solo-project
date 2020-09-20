@@ -16,9 +16,7 @@ const favMapRouter = require('./routes/favMap.router');
 const teamCompRouter = require('./routes/teamComp.router');
 const bnetRouter = require('./routes/bnet_user.router');
 
-app.use(cors({
-  origin: 'http://localhost:3000'
-}));
+app.use(cors());
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -33,8 +31,9 @@ app.use(passport.session());
 
 // use the bnet strategy with cors
 app.use(bnet_passport.initialize());
-app.use(bnet_passport.session())
-app.get('/auth/bnet', bnet_passport.authenticate('bnet'));
+app.use(bnet_passport.session());
+
+app.get('/auth/bnet', bnet_passport.authenticate('bnet', {scope: ['profile']}));
 
 app.get('/auth/bnet/callback',
   bnet_passport.authenticate('bnet', { failureRedirect: '/'}),
@@ -42,6 +41,7 @@ app.get('/auth/bnet/callback',
       res.redirect('/user')
   }
 );
+
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/hero', heroRouter);
