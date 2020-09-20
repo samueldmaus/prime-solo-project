@@ -56,6 +56,15 @@ function* fetchTeamComps(){
     }catch(error){
         console.log('error in SAVE TEAM COMP SAGA:', error)
     }
+};
+
+function* deleteTeamComp(action){
+    try{
+        yield axios.delete(`/api/teamcomp/${action.payload}`);
+        yield put({type:'FETCH_TEAM_COMPS'})
+    }catch(error){
+        console.log('error in TEAM COMP DELETE SAGA', error)
+    }
 }
 
 function* heroSaga() {
@@ -65,6 +74,7 @@ function* heroSaga() {
     yield takeEvery('DELETE_FAV_HERO', deleteFavoriteHero);
     yield takeEvery('FETCH_HERO_FAVORITES', fetchHeroFavorites);
     yield takeEvery('FETCH_TEAM_COMPS', fetchTeamComps);
+    yield takeEvery('DELETE_TEAM_COMP', deleteTeamComp)
 }
 
 export default heroSaga;

@@ -31,6 +31,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     }).catch(error => {
         res.sendStatus(500);
     })
+});
+
+// delete team comp from user's builds
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    let queryText = `DELETE FROM "team_compositions"
+    WHERE "id" = $1 AND "user_id" = $2;`;
+    pool.query(queryText [req.params.id, req.user.id])
+    .then(result => {
+        res.sendStatus(201)
+    }).catch(error => {
+        res.sendStatus(500)
+    })
 })
 
 

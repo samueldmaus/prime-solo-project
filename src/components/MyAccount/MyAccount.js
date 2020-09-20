@@ -4,7 +4,8 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import {withStyles} from '@material-ui/core/styles';
 import {Accordion, AccordionDetails, AccordionSummary, Avatar, IconButton, Grid} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import InfoIcon from '@material-ui/icons/Info'
+import InfoIcon from '@material-ui/icons/Info';
+import DeleteIcon from '@material-ui/icons/Delete'
 
 const styles = theme => ({
   card: {
@@ -35,13 +36,17 @@ class MyAccount extends Component{
     this.props.dispatch({type: "FETCH_TEAM_COMPS"});
   };
 
+  deleteTeamComp = (comp) => {
+    this.props.dispatch({type: "DELETE_TEAM_COMP", payload: comp.id})
+  }
+
   render(){
     const {classes} = this.props;
     return(
       <>
         {this.props.store.heroes && 
           <Accordion className={classes.card} >
-            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/3hIEFad" /><h3>FAVORITE HEROES</h3></AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandMoreIcon/>}><Avatar className={classes.pic} alt="Overwatch Heroes" src="https://bit.ly/3hRWPq2" /><h3>FAVORITE HEROES</h3></AccordionSummary>
             <AccordionDetails className={classes.card}>
               <Grid>
                 {this.props.store.favHeroes.map(hero => (
@@ -79,7 +84,8 @@ class MyAccount extends Component{
                 {this.props.store.teamComps.map(comp => (
                   <>
                   <Grid item xs={12} className={classes.heroDiv} key={comp.id}>
-                    <h4>{comp.name}</h4>
+                    <h4>{comp.name}</h4> 
+                    <IconButton onClick={()=>this.deleteTeamComp(comp)}><DeleteIcon></DeleteIcon></IconButton>
                   </Grid>
                   <Grid item xs={12} className={classes.heroDiv} >
                     {comp.heroList.map(hero => (
