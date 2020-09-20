@@ -53,7 +53,12 @@ class ListHeroes extends Component{
 
     searchForHero = () => {
         let name = document.getElementById('searchHeroInput').value;
-        this.props.dispatch({type:""})
+        console.log(name)
+        if(name !== ''){
+            this.props.dispatch({type:"FETCH_HEROES_NAME", payload: name})
+        }else {
+            this.props.dispatch({type:"FETCH_HEROES", payload: document.getElementById('roleSelect').value});
+        }
     }
 
     render(){

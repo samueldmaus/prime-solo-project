@@ -37,6 +37,20 @@ router.get('/ind/:id', rejectUnauthenticated, (req, res) => {
     }).catch(error => {
         res.sendStatus(500)
     })
+});
+
+//route to get heroes information on search input
+router.get('/search/:name', rejectUnauthenticated, (req, res) => {
+    let search = `%${req.params.name}%`
+    let queryText = `SELECT * FROM "heroes"
+    WHERE "name" ILIKE $1
+    ORDER BY "role" DESC;`;
+    pool.query(queryText, [search])
+    .then(result => {
+        res.send(result.rows)
+    }).catch(error => {
+        res.sendStatus(500)
+    })
 })
 
 // route to post new hero to db

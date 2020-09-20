@@ -65,6 +65,15 @@ function* deleteTeamComp(action){
     }catch(error){
         console.log('error in TEAM COMP DELETE SAGA', error)
     }
+};
+
+function* fetchHeroBySearchName(action){
+    try{
+        let response = yield axios.get(`/api/hero/search/${action.payload}`);
+        yield put ({type: "SET_HEROES", payload: response.data})
+    }catch(error){
+        console.log('error in SEARCH NAME HEROES SAGA:', error)
+    }
 }
 
 function* heroSaga() {
@@ -74,7 +83,8 @@ function* heroSaga() {
     yield takeEvery('DELETE_FAV_HERO', deleteFavoriteHero);
     yield takeEvery('FETCH_HERO_FAVORITES', fetchHeroFavorites);
     yield takeEvery('FETCH_TEAM_COMPS', fetchTeamComps);
-    yield takeEvery('DELETE_TEAM_COMP', deleteTeamComp)
+    yield takeEvery('DELETE_TEAM_COMP', deleteTeamComp);
+    yield takeEvery('FETCH_HEROES_NAME', fetchHeroBySearchName);
 }
 
 export default heroSaga;
