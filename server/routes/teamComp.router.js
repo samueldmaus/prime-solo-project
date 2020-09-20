@@ -39,7 +39,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     WHERE "id" = $1 AND "user_id" = $2;`;
     pool.query(queryText, [req.params.id, req.user.id])
     .then(result => {
-        console.log('deleted')
         res.sendStatus(201)
     }).catch(error => {
         res.sendStatus(500)
