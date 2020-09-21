@@ -52,7 +52,7 @@ class MyAccount extends Component{
                 {this.props.store.favHeroes.map(hero => (
                     <Grid item xs={6} className={classes.infoDiv} key={hero.id}>
                       <Avatar alt={hero.name} src={hero.image} />
-                      <h4 className={classes.name}>{hero.name} - {hero.role}</h4>
+                      <h4 className={classes.name}>{hero.name}</h4>
                       <IconButton onClick={()=>this.props.history.push(`/heroes/${hero.id}`)}><InfoIcon></InfoIcon></IconButton>
                     </Grid>
                 ))}
@@ -68,7 +68,7 @@ class MyAccount extends Component{
                 {this.props.store.favMaps.map(map => (
                     <Grid item xs={6} className={classes.infoDiv} key={map.id}>
                       <Avatar alt={map.name} src={map.image} />
-                      <h4 className={classes.name}>{map.name} - {map.type}</h4>
+                      <h4 className={classes.name}>{map.name}</h4>
                       <IconButton onClick={()=>this.props.history.push(`/maps/${map.id}`)}><InfoIcon></InfoIcon></IconButton>
                     </Grid>
                 ))}

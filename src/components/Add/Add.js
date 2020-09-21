@@ -154,7 +154,7 @@ class Add extends Component{
                 ability_two: 'STICKY BOMBS - Echo fires a volley of sticky bombs that detonates after a delay',
                 ability_three: 'FLIGHT - Echo surges forward quickly, then can fly freely.',
                 ability_four: 'FOCUSING BEAM - Echo channels a beam for a few seconds, dealing very high damage to targets with less than half health.',
-                ability_ult: 'DUPLICATE - Echo duplicates a targeted enemy hero and gains use of their abilities.'
+                ability_ult: 'DUPLICATE - Echo duplicates/becomes an enemy hero and gains use of their abilities, including their ultimate ability'
             },
             ...this.state.newMap
         })

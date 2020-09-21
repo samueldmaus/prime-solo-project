@@ -83,7 +83,7 @@ router.put('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
 // route to delete hero from db
 router.delete('/:id', rejectUnauthenticated, rejectAdmin, (req, res) => {
     let queryText = `DELETE FROM "heroes"
-    WHERE "id" = $1;`;
+    WHERE "heroes".id = $1;`;
     pool.query(queryText, [req.params.id])
     .then(result => {
         res.sendStatus(200)

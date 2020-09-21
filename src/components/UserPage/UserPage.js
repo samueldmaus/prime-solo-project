@@ -17,6 +17,9 @@ const styles = theme => ({
   },
   header: {
     backgroundImage: 'linear-gradient(to left, rgba(255,0,0,0), rgba(250, 156,29))',
+  },
+  title: {
+    margin:10
   }
 })
 
@@ -26,7 +29,7 @@ class UserPage extends Component {
 
     return (
       <>
-        <div>
+        <div className={classes.title}>
           <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
 
         </div>
