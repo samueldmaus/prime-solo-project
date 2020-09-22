@@ -2,7 +2,7 @@ import favHeroReducer from './fav_heroes.reducer';
 import favHeroes from './fav_heroes.reducer';
 
 describe('TESTING THE FAVORITE HEROES REDUCER', () => {
-    test('initial state is an object', () => {
+    test('initial state is an array', () => {
         let testAction = [];
         let returnedSate = favHeroes(undefined, testAction);
 
