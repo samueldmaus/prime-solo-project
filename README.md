@@ -1,12 +1,12 @@
-# Prime Project
+# Start Overwatch
 
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+## Description
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+'Start Overwatch' is an application aimed at beginner Overwatch players. 'Start Overwatch' has detailed descriptions 
+and outlines of all the heroes and map in the game of Overwatch. It is meant to help new players better understand the complex 
+interactions that happen in the game, and thus improve their gameplay.
 
-## Use the Template for This Repository (Don't Clone) 
-
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+Users will be asked to either register for an account or sign into an existing account. 
 
 
 ## Prerequisites
